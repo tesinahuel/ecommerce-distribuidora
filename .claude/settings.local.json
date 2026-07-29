@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Remove-Item *)",
+      "PowerShell(taskkill *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(cd C:\\\\Users\\\\nahue\\\\ecommerce-distribuidora; Start-Process powershell -ArgumentList '-NoExit', '-Command', 'npm run dev' -WindowStyle Normal; Start-Sleep 3; Write-Host \"Dev server started\")",
+      "PowerShell(npx tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 100)",
+      "PowerShell(npm run *)",
+      "PowerShell(npx tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 150)",
+      "PowerShell(git init *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 15; \"STATUS: $\\($r.StatusCode\\)\"; $r.Content.Length } catch { \"ERROR: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=2000 --viewport-size=1440,4000 --full-page http://localhost:3000 \"$env:TEMP\\\\home-preview.png\" 2>&1 | Select-Object -Last 20)",
+      "PowerShell(npx --yes playwright install chromium 2>&1 | Select-Object -Last 30)",
+      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=2000 --viewport-size=1440,1000 http://localhost:3000 \"$env:TEMP\\\\home-preview2.png\" 2>&1 | Select-Object -Last 10)",
+      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=2000 --viewport-size=1440,1200 --full-page http://localhost:3000 \"$env:TEMP\\\\home-full.png\" 2>&1 | Select-Object -Last 10)",
+      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=1500 --viewport-size=1440,900 http://localhost:3000/catalogo \"$env:TEMP\\\\catalogo.png\" 2>&1 | Select-Object -Last 5)"
+    ]
+  }
+}
