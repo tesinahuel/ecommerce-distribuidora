@@ -16,6 +16,7 @@ export default function LineFilter() {
     } else {
       params.delete('linea')
     }
+    params.delete('categoria')
     params.delete('pagina')
     router.push(`/catalogo?${params.toString()}`)
   }
@@ -27,8 +28,8 @@ export default function LineFilter() {
         className={cn('flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all')}
         style={
           !activeLine
-            ? { background: '#CC2200', color: 'white' }
-            : { background: 'rgba(255,255,255,0.07)', color: '#aaa', border: '1px solid rgba(255,255,255,0.1)' }
+            ? { background: 'var(--olive-dark)', color: 'white' }
+            : { background: 'var(--card-white)', color: 'var(--brown-soft)', border: '1px solid var(--hairline)' }
         }
       >
         Todos
@@ -42,8 +43,8 @@ export default function LineFilter() {
             className={cn('flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all')}
             style={
               active
-                ? { background: '#CC2200', color: 'white' }
-                : { background: 'rgba(255,255,255,0.07)', color: '#aaa', border: '1px solid rgba(255,255,255,0.1)' }
+                ? { background: 'var(--olive-dark)', color: 'white' }
+                : { background: 'var(--card-white)', color: 'var(--brown-soft)', border: '1px solid var(--hairline)' }
             }
           >
             <span>{line.icon}</span>

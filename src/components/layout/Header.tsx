@@ -25,7 +25,7 @@ export default function Header() {
   const totalItems = getTotalItems()
   const pathname = usePathname()
 
-  if (pathname === '/') {
+  if (pathname === '/' || pathname.startsWith('/catalogo')) {
     return (
       <>
         <UtilityBar />

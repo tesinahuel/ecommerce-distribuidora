@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createOrder, getAllOrders } from '@/lib/orders'
+import { notifyNewOrder } from '@/lib/notifications'
 import { z } from 'zod'
 
 const createOrderSchema = z.object({
@@ -57,6 +58,8 @@ export async function POST(request: NextRequest) {
       status: 'pendiente',
       paymentStatus: 'pendiente',
     })
+
+    await notifyNewOrder(order)
 
     return NextResponse.json({ data: { order } }, { status: 201 })
   } catch {
