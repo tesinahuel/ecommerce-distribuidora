@@ -23,18 +23,25 @@ function buildOrderSummary(order: Order): string {
 
 async function sendOwnerWhatsapp(order: Order) {
   const phone = process.env.OWNER_WHATSAPP_NUMBER
-  const apiKey = process.env.CALLMEBOT_API_KEY
-  if (!phone || !apiKey) {
-    console.warn('[notifications] WhatsApp al dueño no configurado (falta OWNER_WHATSAPP_NUMBER o CALLMEBOT_API_KEY en .env.local)')
+  const instanceId = process.env.GREEN_API_INSTANCE_ID
+  const apiToken = process.env.GREEN_API_TOKEN
+  if (!phone || !instanceId || !apiToken) {
+    console.warn('[notifications] WhatsApp al dueño no configurado (falta OWNER_WHATSAPP_NUMBER, GREEN_API_INSTANCE_ID o GREEN_API_TOKEN en .env.local)')
     return
   }
 
-  const text = encodeURIComponent(buildOrderSummary(order))
-  const url = `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${text}&apikey=${apiKey}`
+  const url = `https://api.green-api.com/waInstance${instanceId}/sendMessage/${apiToken}`
 
   try {
-    const res = await fetch(url)
-    if (!res.ok) console.error('[notifications] CallMeBot respondió', res.status, await res.text())
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chatId: `${phone}@c.us`,
+        message: buildOrderSummary(order),
+      }),
+    })
+    if (!res.ok) console.error('[notifications] Green API respondió', res.status, await res.text())
   } catch (err) {
     console.error('[notifications] Error enviando WhatsApp al dueño', err)
   }

@@ -16,7 +16,9 @@
       "PowerShell(npx --yes playwright screenshot --wait-for-timeout=2000 --viewport-size=1440,1000 http://localhost:3000 \"$env:TEMP\\\\home-preview2.png\" 2>&1 | Select-Object -Last 10)",
       "PowerShell(npx --yes playwright screenshot --wait-for-timeout=2000 --viewport-size=1440,1200 --full-page http://localhost:3000 \"$env:TEMP\\\\home-full.png\" 2>&1 | Select-Object -Last 10)",
       "PowerShell(npx --yes playwright screenshot --wait-for-timeout=1500 --viewport-size=1440,900 http://localhost:3000/catalogo \"$env:TEMP\\\\catalogo.png\" 2>&1 | Select-Object -Last 5)",
-      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=1500 --viewport-size=1440,1000 http://localhost:3000/catalogo/huevos-organicos-grandes \"$env:TEMP\\\\producto-new.png\" 2>&1 | Select-Object -Last 5)"
+      "PowerShell(npx --yes playwright screenshot --wait-for-timeout=1500 --viewport-size=1440,1000 http://localhost:3000/catalogo/huevos-organicos-grandes \"$env:TEMP\\\\producto-new.png\" 2>&1 | Select-Object -Last 5)",
+      "PowerShell(npx --yes vercel whoami 2>&1)",
+      "Bash(git add *)"
     ]
   }
 }
