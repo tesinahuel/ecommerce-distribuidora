@@ -1,6 +1,7 @@
 import { ShoppingBag, TrendingUp, Clock, DollarSign } from 'lucide-react'
 import Link from 'next/link'
 import { getAdminStats, getAllOrders } from '@/lib/orders'
+import { requireAdmin } from '@/lib/requireAdmin'
 import { formatPrice, formatDate } from '@/lib/utils'
 import { Order, OrderStatus } from '@/types'
 
@@ -22,9 +23,12 @@ const STATUS_COLORS: Record<OrderStatus, string> = {
   cancelado: 'bg-red-100 text-red-700',
 }
 
-export default function AdminDashboard() {
-  const stats = getAdminStats()
-  const recentOrders = getAllOrders().slice(-10).reverse()
+export const dynamic = 'force-dynamic'
+
+export default async function AdminDashboard() {
+  await requireAdmin()
+  const stats = await getAdminStats()
+  const recentOrders = (await getAllOrders()).slice(-10).reverse()
 
   const STAT_CARDS = [
     { label: 'Pedidos totales', value: stats.totalOrders, icon: ShoppingBag, color: 'text-blue-600', bg: 'bg-blue-50' },

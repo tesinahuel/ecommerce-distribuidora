@@ -20,6 +20,8 @@ const SHIFT_LABELS: Record<string, string> = {
   tarde: 'Tarde (13 a 16 hs)',
 }
 
+export const dynamic = 'force-dynamic'
+
 interface PageProps {
   params: Promise<{ orderNumber: string }>
   searchParams: Promise<{ nuevo?: string }>
@@ -28,7 +30,7 @@ interface PageProps {
 export default async function OrderPage({ params, searchParams }: PageProps) {
   const { orderNumber } = await params
   const { nuevo } = await searchParams
-  const order = getOrderByNumber(orderNumber)
+  const order = await getOrderByNumber(orderNumber)
 
   if (!order) return notFound()
 

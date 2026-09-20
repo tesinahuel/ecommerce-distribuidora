@@ -1,6 +1,17 @@
 import { Order } from '@/types'
 import { formatPrice } from './utils'
 
+// Los datos del cliente se insertan en un email HTML: hay que escaparlos.
+const escapeHtml = (text: string) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+function buildNotes(order: Order): string[] {
+  const lines: string[] = []
+  if (order.shippingAddress.notes) lines.push(`Notas de entrega: ${order.shippingAddress.notes}`)
+  if (order.notes) lines.push(`Notas del pedido: ${order.notes}`)
+  return lines
+}
+
 function buildOrderSummary(order: Order): string {
   const itemsText = order.items
     .map((i) => `• ${i.productName} x${i.quantity} — ${formatPrice(i.subtotal)}`)
@@ -18,6 +29,7 @@ function buildOrderSummary(order: Order): string {
     `Envío: ${order.shippingAddress.street} ${order.shippingAddress.number}, ${order.shippingAddress.locality} (turno ${order.shippingAddress.shift})`,
     `Pago: ${order.paymentMethod === 'efectivo' ? 'Efectivo (10% off)' : 'Transferencia bancaria'}`,
     `Total: ${formatPrice(order.total)}`,
+    ...buildNotes(order),
   ].join('\n')
 }
 
@@ -59,8 +71,9 @@ async function sendOwnerEmail(order: Order) {
     const { Resend } = await import('resend')
     const resend = new Resend(apiKey)
     const itemsHtml = order.items
-      .map((i) => `<li>${i.productName} x${i.quantity} — ${formatPrice(i.subtotal)}</li>`)
+      .map((i) => `<li>${escapeHtml(i.productName)} x${i.quantity} — ${formatPrice(i.subtotal)}</li>`)
       .join('')
+    const notesHtml = buildNotes(order).map((n) => `<br/>${escapeHtml(n)}`).join('')
 
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL ?? 'Huevos Cósmicos <onboarding@resend.dev>',
@@ -68,13 +81,13 @@ async function sendOwnerEmail(order: Order) {
       subject: `🥚 Pedido nuevo — ${order.orderNumber}`,
       html: `
         <h2>Pedido ${order.orderNumber}</h2>
-        <p><strong>Cliente:</strong> ${order.customer.name}<br/>
-        <strong>Tel/WhatsApp:</strong> ${order.customer.phone}<br/>
-        <strong>Email:</strong> ${order.customer.email}</p>
+        <p><strong>Cliente:</strong> ${escapeHtml(order.customer.name)}<br/>
+        <strong>Tel/WhatsApp:</strong> ${escapeHtml(order.customer.phone)}<br/>
+        <strong>Email:</strong> ${escapeHtml(order.customer.email)}</p>
         <ul>${itemsHtml}</ul>
-        <p><strong>Envío:</strong> ${order.shippingAddress.street} ${order.shippingAddress.number}, ${order.shippingAddress.locality} (turno ${order.shippingAddress.shift})<br/>
+        <p><strong>Envío:</strong> ${escapeHtml(`${order.shippingAddress.street} ${order.shippingAddress.number}, ${order.shippingAddress.locality}`)} (turno ${order.shippingAddress.shift})<br/>
         <strong>Pago:</strong> ${order.paymentMethod === 'efectivo' ? 'Efectivo (10% off)' : 'Transferencia bancaria'}<br/>
-        <strong>Total:</strong> ${formatPrice(order.total)}</p>
+        <strong>Total:</strong> ${formatPrice(order.total)}${notesHtml}</p>
       `,
     })
   } catch (err) {

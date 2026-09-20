@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getAllOrders } from '@/lib/orders'
+import { requireAdmin } from '@/lib/requireAdmin'
 import { formatPrice, formatDate } from '@/lib/utils'
 import { Order, OrderStatus } from '@/types'
 
@@ -21,8 +22,11 @@ const STATUS_COLORS: Record<OrderStatus, string> = {
   cancelado: 'bg-red-100 text-red-700',
 }
 
-export default function AdminOrdersPage() {
-  const orders = getAllOrders().reverse()
+export const dynamic = 'force-dynamic'
+
+export default async function AdminOrdersPage() {
+  await requireAdmin()
+  const orders = (await getAllOrders()).reverse()
 
   return (
     <div>

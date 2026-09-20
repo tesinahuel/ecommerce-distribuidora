@@ -103,19 +103,11 @@ export default function CheckoutPage() {
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     try {
-      const orderItems = items.map((i) => {
-        // efectivo gets transferPrice (discounted), transferencia gets full price
-        const unitPrice = data.paymentMethod === 'efectivo' && i.product.transferPrice
-          ? i.product.transferPrice
-          : i.product.price
-        return {
-          productId: i.product.id,
-          productName: i.product.name,
-          quantity: i.quantity,
-          unitPrice,
-          subtotal: unitPrice * i.quantity,
-        }
-      })
+      // Solo mandamos QUÉ se pidió. El servidor calcula precios, envío y total.
+      const orderItems = items.map((i) => ({
+        productId: i.product.id,
+        quantity: i.quantity,
+      }))
 
       const response = await fetch('/api/orders', {
         method: 'POST',
@@ -132,22 +124,18 @@ export default function CheckoutPage() {
             shift: data.shift,
             notes: data.shippingNotes,
           },
-          shippingZone: data.zone,
-          shippingCost,
-          subtotal: effectiveSubtotal,
-          total,
           paymentMethod: data.paymentMethod,
           notes: data.notes,
         }),
       })
 
       const result = await response.json()
-      if (!response.ok) throw new Error(result.error)
+      if (!response.ok) throw new Error(result.error ?? 'Error al procesar el pedido')
 
       clearCart()
       router.push(`/pedidos/${result.data.order.orderNumber}?nuevo=true`)
-    } catch {
-      alert('Hubo un error al procesar tu pedido. Intentá de nuevo.')
+    } catch (err) {
+      alert(err instanceof Error && err.message ? `No pudimos procesar tu pedido: ${err.message}` : 'Hubo un error al procesar tu pedido. Intentá de nuevo.')
     } finally {
       setLoading(false)
     }

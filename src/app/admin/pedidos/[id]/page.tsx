@@ -37,10 +37,13 @@ export default function AdminOrderDetailPage() {
     fetch(`/api/orders/${id}`)
       .then((r) => r.json())
       .then((d) => {
-        setOrder(d.data)
-        setNewStatus(d.data.status)
-        setLoading(false)
+        if (d.data) {
+          setOrder(d.data)
+          setNewStatus(d.data.status)
+        }
       })
+      .catch(() => undefined)
+      .finally(() => setLoading(false))
   }, [id])
 
   const handleUpdateStatus = async () => {
@@ -52,6 +55,7 @@ export default function AdminOrderDetailPage() {
         body: JSON.stringify({ status: newStatus }),
       })
       const data = await res.json()
+      if (!res.ok || !data.data) throw new Error(data.error ?? 'Error al actualizar')
       setOrder(data.data)
       alert('Estado actualizado correctamente')
     } catch {
