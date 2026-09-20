@@ -1,217 +1,182 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  Leaf, Star, Truck, ShieldCheck, Handshake, Banknote, HeartHandshake,
-  ArrowRight, Coffee, Dumbbell, Gift, Users,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { getFeaturedProducts } from '@/data/products'
-import { STORE_ADDRESS, DELIVERY_DAYS } from '@/data/shipping'
-import CategoryGrid from '@/components/home/CategoryGrid'
-import FeaturedCarousel from '@/components/home/FeaturedCarousel'
-import WeekendPromoBanner from '@/components/shared/WeekendPromoBanner'
+import WeeklyProductCard from '@/components/home/WeeklyProductCard'
 
-const BENEFITS = [
-  { icon: Leaf, title: '100% NATURALES', desc: 'Sin conservantes ni aditivos' },
-  { icon: Star, title: 'SELECCIONADOS', desc: 'Productos de calidad premium' },
-  { icon: Truck, title: 'ENVÍOS A GBA', desc: DELIVERY_DAYS },
-  { icon: ShieldCheck, title: 'COMPRA SEGURA', desc: 'Efectivo y transferencia' },
-]
-
-const COMBO_PACKS = [
-  { icon: Coffee, label: 'Pack Desayuno' },
-  { icon: Dumbbell, label: 'Pack Fit' },
-  { icon: Gift, label: 'Pack Premium' },
-  { icon: Users, label: 'Pack Familiar' },
-]
-
-const GUARANTEES = [
-  { icon: Handshake, title: 'ATENCIÓN PERSONALIZADA', desc: 'Estamos para asesorarte en lo que necesites' },
-  { icon: Banknote, title: 'PAGOS SEGUROS', desc: 'Efectivo con 10% off y transferencia' },
-  { icon: ShieldCheck, title: 'CALIDAD GARANTIZADA', desc: 'Certificación OIA e INTA' },
-  { icon: HeartHandshake, title: 'SATISFACCIÓN ASEGURADA', desc: 'Tu bienestar es nuestra prioridad' },
+const LINES = [
+  {
+    id: 'agroecologicos',
+    name: 'Agroecológicos',
+    description: 'Huevos orgánicos, aceite de oliva extra virgen y miel pura, certificados OIA.',
+    image: '/images/products/huevos-organicos.jpg',
+    href: '/catalogo?linea=agroecologicos',
+  },
+  {
+    id: 'proteina-pura',
+    name: 'Proteína pura',
+    description: 'Supremas pastoriles, convencionales, pollo y huevos de primera calidad.',
+    image: '/images/products/pechuga-premium.png',
+    href: '/catalogo?linea=proteina-pura',
+  },
+  {
+    id: 'desayuno',
+    name: 'Desayuno',
+    description: 'Granola, avena, copos de maíz, miel y frutos secos para arrancar bien el día.',
+    image: '/images/products/miel.jpg',
+    href: '/catalogo?linea=desayuno',
+  },
 ]
 
 export default function HomePage() {
   const featured = getFeaturedProducts()
 
   return (
-    <div className="font-sans-ui" style={{ background: 'var(--cream)' }}>
+    <div style={{ background: 'var(--cream)' }}>
 
       {/* ─── Hero ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden" style={{ height: '480px' }}>
+      <section className="relative overflow-hidden" style={{ height: '560px' }}>
         <Image
           src="/images/products/packaging.jpg"
-          alt="Huevos Cósmicos — packaging premium"
+          alt="Huevos Cósmicos — canasta gourmet"
           fill
           priority
           className="object-cover"
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(90deg, rgba(45,35,28,0.88) 0%, rgba(45,35,28,0.55) 45%, rgba(45,35,28,0.1) 75%)' }}
+          style={{ background: 'linear-gradient(90deg, rgba(28,30,20,0.92) 0%, rgba(28,30,20,0.78) 38%, rgba(28,30,20,0.05) 72%)' }}
         />
         <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-          <div style={{ maxWidth: '45%' }} className="w-full">
-            <h1
-              className="font-display leading-[1.05] mb-4"
-              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', fontWeight: 600, color: '#fff' }}
-            >
-              Elegí alimentos reales, elegí bienestar.
-            </h1>
-            <p className="mb-8 leading-relaxed" style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.85)' }}>
-              Productos naturales y seleccionados para una vida más saludable.
+          <div style={{ maxWidth: '610px' }} className="w-full">
+            <p className="nav-label mb-5" style={{ fontSize: '11px', letterSpacing: '0.3em', color: 'var(--gold)' }}>
+              Directo del productor · Ramos Mejía
             </p>
-            <Link
-              href="/catalogo"
-              className="btn-olive inline-flex items-center gap-2 text-xs font-bold uppercase px-7 py-3.5 rounded"
-              style={{ letterSpacing: '0.08em' }}
+            <h1
+              className="font-display leading-[1.08] mb-6"
+              style={{ fontSize: 'clamp(2.4rem, 5.5vw, 68px)', fontWeight: 600, color: '#fff' }}
             >
-              Comprar ahora <ArrowRight className="w-4 h-4" />
-            </Link>
+              Alimentos reales,<br />
+              <em style={{ color: 'var(--gold-light)', fontStyle: 'italic' }}>elegidos con cuidado.</em>
+            </h1>
+            <p className="font-sans-ui mb-9 leading-relaxed" style={{ fontSize: '16px', fontWeight: 300, color: '#D6D0C0', maxWidth: '480px' }}>
+              Productos naturales y seleccionados, entregados directo de la granja a tu mesa en GBA y CABA.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/catalogo"
+                className="btn-label inline-flex items-center gap-2 px-8 py-4"
+                style={{ background: '#FCFAF5', color: 'var(--olive-dark)' }}
+              >
+                Ver la tienda <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.6} />
+              </Link>
+              <Link
+                href="/catalogo#packs"
+                className="btn-label inline-flex items-center gap-2 px-8 py-4"
+                style={{ border: '1px solid rgba(255,255,255,0.6)', color: '#fff' }}
+              >
+                Nuestros combos
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Barra de beneficios ──────────────────────────── */}
-      <section style={{ background: 'var(--beige)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {BENEFITS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex items-center gap-3">
-                <Icon className="w-6 h-6 leaf-ornament shrink-0" strokeWidth={1.5} />
-                <div>
-                  <p className="text-xs font-bold uppercase" style={{ letterSpacing: '0.05em', color: 'var(--brown)' }}>{title}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--brown-soft)' }}>{desc}</p>
+      {/* ─── Banda manifiesto ──────────────────────────────── */}
+      <section id="nosotros" className="flex items-center justify-center" style={{ minHeight: '176px', background: 'var(--beige)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <p
+            className="font-display text-center mx-auto leading-relaxed"
+            style={{ fontSize: '28px', fontWeight: 400, color: 'var(--text-primary)', maxWidth: '760px' }}
+          >
+            Trabajamos con productores certificados por <em style={{ fontStyle: 'italic' }}>OIA</em> e <em style={{ fontStyle: 'italic' }}>INTA</em>.
+            Cada maple sale de la granja y llega a tu casa sin pasar por ningún depósito.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Líneas de producto ────────────────────────────── */}
+      <section style={{ padding: '64px 0' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="eyebrow mb-3">Nuestras líneas</p>
+            <h2 className="font-display" style={{ fontSize: '40px', fontWeight: 600, color: 'var(--text-primary)' }}>
+              Elegí por lo que buscás
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+            {LINES.map((line) => (
+              <Link key={line.id} href={line.href} className="group block">
+                <div className="relative overflow-hidden" style={{ height: '232px', background: 'var(--beige)' }}>
+                  <Image
+                    src={line.image}
+                    alt={line.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
                 </div>
-              </div>
+                <h3 className="font-display mt-5" style={{ fontSize: '25px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  {line.name}
+                </h3>
+                <p className="font-sans-ui mt-1.5" style={{ fontSize: '13.5px', fontWeight: 300, color: 'var(--text-secondary)' }}>
+                  {line.description}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Promos de fin de semana ──────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <WeekendPromoBanner />
-      </section>
-
-      {/* ─── Categorías ───────────────────────────────────── */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-4 mb-10">
-            <Leaf className="w-5 h-5 leaf-ornament" strokeWidth={1.5} />
-            <h2 className="font-display text-center" style={{ fontSize: '2.25rem', fontWeight: 600, color: 'var(--brown)' }}>
-              Explorá nuestras categorías
-            </h2>
-            <Leaf className="w-5 h-5 leaf-ornament -scale-x-100" strokeWidth={1.5} />
-          </div>
-          <CategoryGrid />
-        </div>
-      </section>
-
-      {/* ─── Banner de combos ─────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="rounded-lg overflow-hidden flex flex-col md:flex-row" style={{ background: 'var(--beige)' }}>
-          <div className="relative md:w-[40%] h-64 md:h-auto">
-            <Image src="/images/products/estuches.jpg" alt="Combos Huevos Cósmicos" fill className="object-cover" />
-          </div>
-          <div className="md:w-[60%] p-8 sm:p-12 flex flex-col sm:flex-row sm:items-center gap-8">
-            <div className="flex-1">
-              <h3 className="font-display mb-3" style={{ fontSize: '2.1rem', fontWeight: 600, color: 'var(--brown)' }}>
-                Combos pensados para vos
-              </h3>
-              <p className="mb-6 text-sm leading-relaxed" style={{ color: 'var(--brown-soft)' }}>
-                Ahorrá tiempo y elegí tu combo ideal para cada momento del día.
-              </p>
-              <Link
-                href="/catalogo#packs"
-                className="btn-olive inline-flex items-center gap-2 text-xs font-bold uppercase px-6 py-3 rounded"
-                style={{ letterSpacing: '0.08em' }}
-              >
-                Ver combos
-              </Link>
-            </div>
-            <div className="flex gap-5 sm:gap-4 shrink-0">
-              {COMBO_PACKS.map(({ icon: Icon, label }) => (
-                <div key={label} className="flex flex-col items-center gap-2 text-center" style={{ width: '64px' }}>
-                  <Icon className="w-6 h-6 leaf-ornament" strokeWidth={1.5} />
-                  <span className="text-[10px] font-semibold uppercase leading-tight" style={{ letterSpacing: '0.03em', color: 'var(--brown)' }}>
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Productos destacados ──────────────────────────── */}
+      {/* ─── Selección de la semana ────────────────────────── */}
       {featured.length > 0 && (
-        <section className="py-16" style={{ background: 'var(--beige)' }}>
+        <section style={{ padding: '64px 0', background: 'var(--beige)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-8">
-              <h2 className="font-display" style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--brown)' }}>
-                Productos destacados
+            <div className="flex items-end justify-between pb-5 mb-10" style={{ borderBottom: '1px solid var(--hairline)' }}>
+              <h2 className="font-display" style={{ fontSize: '36px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                Selección de la semana
               </h2>
               <Link
                 href="/catalogo"
-                className="text-xs font-semibold uppercase flex items-center gap-1 shrink-0"
-                style={{ letterSpacing: '0.06em', color: 'var(--olive-dark)' }}
+                className="nav-label flex items-center gap-1.5 shrink-0"
+                style={{ fontSize: '11.5px', letterSpacing: '0.14em', color: 'var(--olive-dark)' }}
               >
-                Ver todos los productos <ArrowRight className="w-3.5 h-3.5" />
+                Ver todo <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.6} />
               </Link>
             </div>
-            <FeaturedCarousel products={featured} />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+              {featured.slice(0, 4).map((product) => (
+                <WeeklyProductCard key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         </section>
       )}
 
-      {/* ─── Banda editorial ──────────────────────────────── */}
-      <section id="nosotros" className="relative overflow-hidden" style={{ height: '360px' }}>
-        <div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 20% 50%, #5a4632 0%, #3D3228 55%, #241d16 100%)' }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(90deg, rgba(20,15,10,0.7) 0%, transparent 65%)' }}
-        />
-        <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-          <div style={{ maxWidth: '520px' }}>
-            <h2 className="font-display leading-tight mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 600, color: '#fff' }}>
-              Pequeñas elecciones, grandes cambios.
-            </h2>
-            <p className="mb-7 leading-relaxed" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem' }}>
-              Incorporá alimentos reales a tu rutina y sentí la diferencia todos los días.
+      {/* ─── Banda corporativa ─────────────────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-2" style={{ minHeight: '300px' }}>
+        <div className="flex items-center" style={{ background: 'var(--olive-dark)' }}>
+          <div className="px-6 sm:px-10 lg:px-16 py-14 max-w-lg">
+            <p className="nav-label mb-4" style={{ fontSize: '11px', letterSpacing: '0.3em', color: 'var(--gold)' }}>
+              Para empresas
             </p>
-            <a
-              href={`https://wa.me/${STORE_ADDRESS.whatsapp}?text=${encodeURIComponent('Hola, quiero conocer más sobre Huevos Cósmicos')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase px-6 py-3 rounded"
-              style={{ letterSpacing: '0.08em', background: 'var(--gold-warm)', color: 'var(--brown)' }}
+            <h2 className="font-display mb-4 leading-tight" style={{ fontSize: '40px', fontWeight: 600, color: '#fff' }}>
+              Canastas y regalos con tu marca
+            </h2>
+            <p className="font-sans-ui mb-7 leading-relaxed" style={{ fontSize: '15px', fontWeight: 300, color: 'rgba(255,255,255,0.8)' }}>
+              Packaging personalizado para regalos empresariales, eventos y fin de año.
+            </p>
+            <Link
+              href="/empresas"
+              className="btn-label inline-flex items-center px-7 py-3.5"
+              style={{ background: 'var(--gold)', color: 'var(--olive-darker)' }}
             >
               Conocé más
-            </a>
+            </Link>
           </div>
         </div>
-      </section>
-
-      {/* ─── Barra de garantías ───────────────────────────── */}
-      <section style={{ background: 'var(--olive-dark)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {GUARANTEES.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={title}
-                className={`flex flex-col items-center text-center px-4 py-4 sm:py-0 ${i > 0 ? 'sm:border-l' : ''}`}
-                style={{ borderColor: 'rgba(255,255,255,0.15)' }}
-              >
-                <Icon className="w-7 h-7 mb-3" strokeWidth={1.5} style={{ color: 'var(--gold-warm)' }} />
-                <p className="text-xs font-bold uppercase mb-1.5 text-white" style={{ letterSpacing: '0.05em' }}>{title}</p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.7)' }}>{desc}</p>
-              </div>
-            ))}
-          </div>
+        <div className="relative min-h-[260px] md:min-h-0">
+          <Image src="/images/products/estuches.jpg" alt="Packaging personalizado para empresas" fill className="object-cover" />
         </div>
       </section>
     </div>

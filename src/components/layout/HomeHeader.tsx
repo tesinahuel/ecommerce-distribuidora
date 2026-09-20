@@ -3,22 +3,20 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Search, Heart, ShoppingCart, Menu, X, ChevronDown, Leaf } from 'lucide-react'
+import { Search, User, ShoppingCart, Menu, X } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
-import { CATEGORIES } from '@/data/categories'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
-  { href: '/', label: 'Inicio' },
-  { href: '/catalogo', label: 'Productos', dropdown: true },
+  { href: '/catalogo', label: 'Tienda' },
+  { href: '/catalogo?linea=agroecologicos', label: 'Agroecológicos' },
   { href: '/catalogo#packs', label: 'Combos' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/empresas', label: 'Empresas' },
+  { href: '/#nosotros', label: 'Nosotros' },
 ]
 
 export default function HomeHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [productsOpen, setProductsOpen] = useState(false)
   const { getTotalItems, toggleCart } = useCartStore()
   const totalItems = getTotalItems()
 
@@ -28,95 +26,65 @@ export default function HomeHeader() {
       style={{ background: 'var(--cream)', borderColor: 'var(--hairline)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between" style={{ height: '96px' }}>
 
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-center gap-0.5 shrink-0">
-            <Leaf className="w-3.5 h-3.5 leaf-ornament" strokeWidth={1.5} />
-            <div className="flex items-center gap-2">
-              <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0">
-                <Image src="/images/logo.png" alt="Huevos Cósmicos" fill className="object-cover" />
-              </div>
-              <span className="font-display leading-none" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
-                Huevos Cósmicos
-              </span>
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0">
+              <Image src="/images/logo.png" alt="Huevos Cósmicos" fill className="object-cover" />
             </div>
-            <span className="gourmet-eyebrow" style={{ fontSize: '0.6rem', color: 'var(--brown-soft)' }}>
-              Despensa Saludable
+            <span
+              className="nav-label"
+              style={{ fontSize: '10.5px', letterSpacing: '0.22em', color: 'var(--text-primary)' }}
+            >
+              Despensa<br />Saludable
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
-              <div
+              <Link
                 key={link.href}
-                className="relative"
-                onMouseEnter={() => link.dropdown && setProductsOpen(true)}
-                onMouseLeave={() => link.dropdown && setProductsOpen(false)}
+                href={link.href}
+                className="nav-label transition-colors"
+                style={{ fontSize: '12.5px', letterSpacing: '0.15em', color: 'var(--text-primary)' }}
               >
-                <Link
-                  href={link.href}
-                  className="flex items-center gap-1 text-xs font-medium uppercase px-3 py-2 rounded transition-colors"
-                  style={{ letterSpacing: '0.08em', color: 'var(--brown)' }}
-                >
-                  {link.label}
-                  {link.dropdown && <ChevronDown className="w-3 h-3" strokeWidth={1.5} />}
-                </Link>
-                {link.dropdown && (
-                  <div
-                    className={cn(
-                      'absolute left-0 top-full w-64 rounded-lg overflow-hidden transition-all duration-150',
-                      productsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1'
-                    )}
-                    style={{ background: 'var(--card-white)', boxShadow: '0 12px 30px rgba(61,50,40,0.15)' }}
-                  >
-                    {CATEGORIES.filter((c) => c.id !== 'packs').map((cat) => (
-                      <Link
-                        key={cat.id}
-                        href={`/catalogo?categoria=${cat.id}`}
-                        className="block px-4 py-2.5 text-xs font-medium uppercase hover:bg-[var(--beige)] transition-colors"
-                        style={{ letterSpacing: '0.06em', color: 'var(--brown)' }}
-                      >
-                        {cat.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                {link.label}
+              </Link>
             ))}
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-1">
-            <button aria-label="Buscar" className="p-2 rounded-lg transition-colors hover:bg-[var(--beige)]" style={{ color: 'var(--brown)' }}>
-              <Search className="w-5 h-5" strokeWidth={1.5} />
+            <button aria-label="Buscar" className="p-2 transition-opacity hover:opacity-60" style={{ color: 'var(--olive-dark)' }}>
+              <Search className="w-[19px] h-[19px]" strokeWidth={1.4} />
             </button>
-            <button aria-label="Favoritos" className="hidden sm:inline-flex p-2 rounded-lg transition-colors hover:bg-[var(--beige)]" style={{ color: 'var(--brown)' }}>
-              <Heart className="w-5 h-5" strokeWidth={1.5} />
+            <button aria-label="Mi cuenta" className="hidden sm:inline-flex p-2 transition-opacity hover:opacity-60" style={{ color: 'var(--olive-dark)' }}>
+              <User className="w-[19px] h-[19px]" strokeWidth={1.4} />
             </button>
             <button
               onClick={toggleCart}
               aria-label="Carrito"
-              className="relative p-2 rounded-lg transition-colors hover:bg-[var(--beige)]"
-              style={{ color: 'var(--brown)' }}
+              className="relative p-2 transition-opacity hover:opacity-60"
+              style={{ color: 'var(--olive-dark)' }}
             >
-              <ShoppingCart className="w-5 h-5" strokeWidth={1.5} />
+              <ShoppingCart className="w-[19px] h-[19px]" strokeWidth={1.4} />
               {totalItems > 0 && (
                 <span
-                  className="absolute -top-0.5 -right-0.5 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
-                  style={{ background: 'var(--olive-dark)' }}
+                  className="absolute -top-0.5 -right-0.5 text-[10px] font-medium rounded-full w-4 h-4 flex items-center justify-center"
+                  style={{ background: 'var(--gold)', color: 'var(--olive-darker)' }}
                 >
                   {totalItems > 9 ? '9+' : totalItems}
                 </span>
               )}
             </button>
             <button
-              className="lg:hidden p-2 rounded-lg transition-colors"
-              style={{ color: 'var(--brown)' }}
+              className="lg:hidden p-2 transition-opacity"
+              style={{ color: 'var(--olive-dark)' }}
               onClick={() => setMobileOpen(!mobileOpen)}
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="w-5 h-5" strokeWidth={1.4} /> : <Menu className="w-5 h-5" strokeWidth={1.4} />}
             </button>
           </div>
         </div>
@@ -132,8 +100,8 @@ export default function HomeHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="py-2.5 px-2 text-xs font-medium uppercase border-b last:border-0"
-              style={{ letterSpacing: '0.08em', color: 'var(--brown)', borderColor: 'var(--hairline)' }}
+              className="nav-label py-2.5 px-2 border-b last:border-0"
+              style={{ fontSize: '12px', letterSpacing: '0.15em', color: 'var(--text-primary)', borderColor: 'var(--hairline)' }}
               onClick={() => setMobileOpen(false)}
             >
               {link.label}

@@ -1,83 +1,74 @@
 @import "tailwindcss";
 
+/* ════════════════════════════════════════════════════════
+   Paleta "editorial gourmet" — sitio completo
+   ════════════════════════════════════════════════════════ */
 :root {
-  --bg-main: #050510;
-  --bg-card: #0d0d2b;
-  --bg-card-hover: #111135;
-  --red: #CC2200;
-  --red-hover: #e02800;
-  --gold: #D4AF37;
-  --gold-light: #f0d060;
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --border-red: rgba(204, 34, 0, 0.35);
-  --border-gold: rgba(212, 175, 55, 0.4);
+  --cream: #FAF7F1;
+  --beige: #F1EADC;
+  --olive-dark: #2F3A26;
+  --olive-darker: #23291C;
+  --gold: #C9A227;
+  --gold-light: #E8C46A;
+
+  --text-primary: #3C3527;
+  --text-secondary: #6E6857;
+  --text-tertiary: #9A9078;
+  --hairline: #E6DFD1;
+
+  --card-white: #FFFFFF;
+
+  /* aliases retro-compatibles usados en algunos componentes */
+  --brown: var(--text-primary);
+  --brown-soft: var(--text-secondary);
 }
 
 body {
-  background: var(--bg-main);
+  background: var(--cream);
   color: var(--text-primary);
 }
 
-/* ─── Fuente brand (Bebas Neue) ──────────────────────── */
-.font-brand {
-  font-family: var(--font-brand), 'Arial Narrow', sans-serif;
+/* ─── Tipografía ─────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display), 'Georgia', serif;
 }
 
-/* Título principal: bold impactante, blanco con sombra roja */
-.brand-title {
-  font-family: var(--font-brand), sans-serif;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  text-shadow:
-    2px 3px 0px #CC2200,
-    0   0  18px rgba(204, 34, 0, 0.45),
-    0   0  40px rgba(204, 34, 0, 0.15);
+.font-sans-ui {
+  font-family: var(--font-sans), 'Helvetica Neue', sans-serif;
 }
 
-/* Subtítulo/slogan: Montserrat regular */
-.brand-subtitle {
-  font-family: var(--font-body), sans-serif;
-  color: #ffffff;
-  text-shadow:
-    1px 2px 0px #CC2200,
-    0   0  12px rgba(204, 34, 0, 0.35);
+.eyebrow {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  color: var(--gold);
 }
 
-/* Versión dorada (para usar sobre fondos oscuros sin rojo) */
-.brand-gold {
-  font-family: var(--font-brand), sans-serif;
-  color: #D4AF37;
-  letter-spacing: 0.02em;
-  text-shadow:
-    1px 2px 0px rgba(0,0,0,0.6),
-    0   0  16px rgba(212, 175, 55, 0.4);
+.gourmet-eyebrow {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nav-label {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.btn-label {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11.5px;
+  font-weight: 500;
 }
 
 /* ─── Animaciones ────────────────────────────────────── */
 @keyframes twinkle {
   0%, 100% { opacity: 0.12; transform: scale(0.75); }
   50% { opacity: 1; transform: scale(1.4); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes pulse-glow-red {
-  0%, 100% { box-shadow: 0 0 8px rgba(204,34,0,0.4); }
-  50% { box-shadow: 0 0 22px rgba(204,34,0,0.75), 0 0 44px rgba(204,34,0,0.2); }
-}
-
-@keyframes pulse-glow-gold {
-  0%, 100% { box-shadow: 0 0 6px rgba(212,175,55,0.3); }
-  50% { box-shadow: 0 0 18px rgba(212,175,55,0.6), 0 0 36px rgba(212,175,55,0.15); }
-}
-
-@keyframes shimmer-gold {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
 }
 
 @keyframes slide-up {
@@ -99,179 +90,45 @@ body {
   overflow: hidden;
 }
 
-/* ─── Text gradients ─────────────────────────────────── */
-.gold-text {
-  background: linear-gradient(135deg, #b8922a 0%, #D4AF37 30%, #f0d060 55%, #D4AF37 75%, #b8922a 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer-gold 4s linear infinite;
-}
-
-.gold-text-static {
-  background: linear-gradient(135deg, #D4AF37, #f0d060, #D4AF37);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ─── Separadores cósmicos ───────────────────────────── */
-.cosmic-sep {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(212,175,55,0.25) 25%,
-    rgba(204,34,0,0.5) 50%,
-    rgba(212,175,55,0.25) 75%,
-    transparent 100%
-  );
-}
-
-.cosmic-sep-gold {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(212,175,55,0.5) 30%,
-    rgba(240,208,96,0.7) 50%,
-    rgba(212,175,55,0.5) 70%,
-    transparent 100%
-  );
-}
-
-/* ─── Fondo galaxia ──────────────────────────────────── */
+/* ─── Fondo galaxia (uso exclusivo: /empresas) ──────── */
 .galaxy-bg {
   background: radial-gradient(ellipse at 20% 50%, #1a0a2e 0%, #050510 50%, #0a0518 100%);
 }
 
-/* ─── Cards ──────────────────────────────────────────── */
-.card-dark {
-  background: var(--bg-card);
-  border: 1px solid var(--border-red);
-  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.card-dark:hover {
-  border-color: rgba(212,175,55,0.55);
-  background: var(--bg-card-hover);
-  box-shadow:
-    0 12px 40px rgba(0,0,0,0.65),
-    0 0 0 1px rgba(212,175,55,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.04);
-  transform: translateY(-3px);
-}
-
-/* ─── Botones ────────────────────────────────────────── */
-.btn-red {
-  background: var(--red);
-  color: white;
-  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 4px 16px rgba(204,34,0,0.35);
-}
-
-.btn-red:hover {
-  background: var(--gold);
-  color: #050510;
-  box-shadow: 0 4px 22px rgba(212,175,55,0.45);
-  transform: translateY(-1px);
-}
-
-.btn-red:active {
-  transform: translateY(0);
-}
-
-.btn-gold {
-  background: var(--gold);
-  color: #050510;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-  box-shadow: 0 4px 14px rgba(212,175,55,0.3);
-}
-
-.btn-gold:hover {
-  background: var(--gold-light);
-  box-shadow: 0 4px 20px rgba(212,175,55,0.5);
-  transform: translateY(-1px);
-}
-
-/* ─── Badge de descuento ─────────────────────────────── */
-.badge-discount {
-  animation: pulse-glow-red 2.5s ease-in-out infinite;
-}
-
-/* ─── Inputs oscuros ─────────────────────────────────── */
-.input-dark {
-  background: #050510;
-  border: 1px solid rgba(255,255,255,0.1);
-  color: white;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.input-dark:focus {
-  border-color: rgba(204,34,0,0.6);
-  box-shadow: 0 0 0 3px rgba(204,34,0,0.1);
-  outline: none;
-}
-
-/* ─── Logo header glow ───────────────────────────────── */
-.logo-glow {
-  filter: drop-shadow(0 0 8px rgba(212,175,55,0.4));
-}
-
-/* ════════════════════════════════════════════════════════
-   Paleta "gourmet" — usada exclusivamente en el Home (/)
-   ════════════════════════════════════════════════════════ */
-:root {
-  --cream: #FAF7F2;
-  --beige: #F0E9DE;
-  --olive-dark: #3A4A2E;
-  --olive-mid: #4A5D3A;
-  --brown: #3D3228;
-  --brown-soft: #7A6A58;
-  --gold-warm: #C9A227;
-  --red-brand: #CC2200;
-  --card-white: #FFFFFF;
-  --hairline: #E5DACB;
-}
-
-.font-display {
-  font-family: var(--font-display), 'Georgia', serif;
-}
-
-.font-sans-ui {
-  font-family: var(--font-sans), 'Inter', sans-serif;
-}
-
-.gourmet-eyebrow {
-  font-family: var(--font-sans), sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
+/* ─── Cards de producto (sin caja, foto + texto sueltos) */
 .gourmet-card {
-  background: var(--card-white);
-  box-shadow: 0 2px 14px rgba(61, 50, 40, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: transparent;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .gourmet-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(61, 50, 40, 0.14);
+  transform: translateY(-3px);
 }
 
 .btn-olive {
-  background: var(--olive-mid);
+  background: var(--olive-dark);
   color: #ffffff;
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .btn-olive:hover {
-  background: var(--olive-dark);
+  background: var(--olive-darker);
   transform: translateY(-1px);
 }
 
+.btn-outline-olive {
+  background: transparent;
+  border: 1px solid var(--olive-dark);
+  color: var(--olive-dark);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline-olive:hover {
+  background: var(--olive-dark);
+  color: #ffffff;
+}
+
 .leaf-ornament {
-  color: var(--gold-warm);
+  color: var(--gold);
   opacity: 0.85;
 }

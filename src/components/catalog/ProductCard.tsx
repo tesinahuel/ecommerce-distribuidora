@@ -41,7 +41,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const savings = hasDiscount ? displayOriginalPrice! - displayPrice : 0
 
   return (
-    <div className="gourmet-card font-sans-ui rounded-lg overflow-hidden flex flex-col">
+    <div className="gourmet-card font-sans-ui flex flex-col">
       {/* Image */}
       <Link href={`/catalogo/${product.slug}`} className="block relative aspect-square overflow-hidden" style={{ background: 'var(--beige)' }}>
         {mainImage ? (
@@ -59,15 +59,15 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
         {product.featured && (
           <span
-            className="absolute top-2 left-2 text-white text-[10px] font-bold uppercase px-2 py-1 rounded"
-            style={{ background: 'var(--olive-dark)', letterSpacing: '0.04em' }}
+            className="absolute top-0 left-0 nav-label px-2.5 py-1.5"
+            style={{ background: 'var(--olive-dark)', color: 'var(--cream)', fontSize: '10px', letterSpacing: '0.14em' }}
           >
             Destacado
           </span>
         )}
         <div className="absolute top-2 right-2 flex flex-col gap-1 items-end">
           {hasVariants && (
-            <span className="text-[10px] font-bold px-2 py-1 rounded" style={{ background: 'var(--card-white)', color: 'var(--brown)' }}>
+            <span className="text-[10px] font-medium px-2 py-1" style={{ background: 'var(--card-white)', color: 'var(--text-primary)' }}>
               {product.variants!.length} presentaciones
             </span>
           )}
@@ -76,66 +76,65 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
 
       {/* Content */}
-      <div className="p-3.5 flex flex-col flex-1">
-        <div
-          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase mb-2 w-fit"
-          style={{ background: 'var(--beige)', color: 'var(--brown-soft)', letterSpacing: '0.04em' }}
+      <div className="pt-3 flex flex-col flex-1">
+        <p
+          className="nav-label mb-1.5"
+          style={{ fontSize: '10.5px', letterSpacing: '0.1em', color: 'var(--text-tertiary)' }}
         >
-          <span>{badge.icon}</span>
-          <span>{badge.name}</span>
-        </div>
+          {badge.name}
+        </p>
 
         <Link href={`/catalogo/${product.slug}`} className="flex-1">
-          <h3 className="font-semibold text-sm leading-tight line-clamp-2" style={{ color: 'var(--brown)' }}>
+          <h3 className="font-display leading-snug line-clamp-2" style={{ fontSize: '17px', fontWeight: 600, color: 'var(--text-primary)' }}>
             {product.name}
           </h3>
           {product.packItems && product.packItems.length > 0 ? (
             <ul className="mt-1.5 space-y-0.5">
               {product.packItems.map((item) => (
-                <li key={item} className="text-xs flex items-center gap-1" style={{ color: 'var(--brown-soft)' }}>
-                  <span style={{ color: 'var(--gold-warm)' }}>✓</span> {item}
+                <li key={item} className="text-xs flex items-center gap-1" style={{ color: 'var(--text-secondary)' }}>
+                  <span style={{ color: 'var(--gold)' }}>—</span> {item}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-xs mt-1.5 line-clamp-2 leading-relaxed" style={{ color: 'var(--brown-soft)' }}>
+            <p className="text-xs mt-1 line-clamp-2 leading-relaxed font-sans-ui" style={{ color: 'var(--text-secondary)', fontWeight: 300 }}>
               {product.description}
             </p>
           )}
         </Link>
 
         {/* Price */}
-        <div className="mt-3 pt-3 border-t" style={{ borderColor: 'var(--hairline)' }}>
+        <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--hairline)' }}>
           {displayPrice === 0 ? (
             <div className="mb-2">
               {hasVariants ? (
-                <span className="text-xs font-bold" style={{ color: 'var(--olive-dark)' }}>Precio a consultar · elegí peso</span>
+                <span className="text-xs font-medium" style={{ color: 'var(--olive-dark)' }}>Precio a consultar · elegí peso</span>
               ) : (
-                <span className="text-sm font-bold" style={{ color: 'var(--olive-dark)' }}>Precio a consultar</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--olive-dark)' }}>Precio a consultar</span>
               )}
             </div>
           ) : (
             <div className="mb-2">
               <div className="flex items-end justify-between gap-2">
                 <div>
-                  <p className="text-xs mb-0.5" style={{ color: 'var(--brown-soft)' }}>{hasVariants ? 'Desde (efectivo)' : 'Efectivo'}</p>
+                  <p className="text-xs mb-0.5" style={{ color: 'var(--text-secondary)' }}>{hasVariants ? 'Desde (efectivo)' : 'Efectivo'}</p>
                   <div className="flex items-baseline gap-1.5">
                     {hasDiscount && (
-                      <span className="text-xs line-through" style={{ color: 'var(--brown-soft)' }}>{formatPrice(displayOriginalPrice!)}</span>
+                      <span className="text-xs line-through" style={{ color: 'var(--text-tertiary)' }}>{formatPrice(displayOriginalPrice!)}</span>
                     )}
-                    <span className="text-base font-bold" style={{ color: 'var(--brown)' }}>{formatPrice(displayPrice)}</span>
+                    <span className="font-sans-ui" style={{ fontSize: '18px', fontWeight: 500, color: 'var(--text-primary)' }}>{formatPrice(displayPrice)}</span>
                   </div>
-                  {!hasVariants && <span className="text-xs ml-1" style={{ color: 'var(--brown-soft)' }}>/ {product.unit}</span>}
+                  {!hasVariants && <span className="text-xs ml-1" style={{ color: 'var(--text-secondary)' }}>/ {product.unit}</span>}
                 </div>
                 {!hasVariants && hasTransferDiscount && (
                   <div className="text-right">
-                    <p className="text-xs mb-0.5 font-medium" style={{ color: 'var(--gold-warm)' }}>Transf. 💸</p>
-                    <span className="text-base font-bold" style={{ color: 'var(--gold-warm)' }}>{formatPrice(product.transferPrice!)}</span>
+                    <p className="text-xs mb-0.5 font-medium" style={{ color: 'var(--gold)' }}>Transferencia</p>
+                    <span className="text-base font-medium" style={{ color: 'var(--gold)' }}>{formatPrice(product.transferPrice!)}</span>
                   </div>
                 )}
               </div>
               {hasDiscount && (
-                <span className="inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: 'var(--olive-dark)' }}>
+                <span className="inline-block mt-1.5 nav-label px-2 py-0.5" style={{ background: 'var(--olive-dark)', color: '#fff', fontSize: '9.5px' }}>
                   Ahorrás {formatPrice(savings)}
                 </span>
               )}
@@ -145,30 +144,29 @@ export default function ProductCard({ product }: ProductCardProps) {
           {hasVariants ? (
             <Link
               href={`/catalogo/${product.slug}`}
-              className="btn-olive w-full flex items-center justify-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded"
+              className="btn-label w-full flex items-center justify-center gap-1.5 py-2.5"
+              style={{ border: '1px solid var(--olive-dark)', color: 'var(--olive-dark)' }}
             >
-              Elegir presentación →
+              Elegir presentación
             </Link>
           ) : (
             <button
               onClick={handleAdd}
               disabled={product.price === 0}
-              className={`w-full flex items-center justify-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded transition-colors duration-200 ${
-                product.price === 0 ? 'cursor-not-allowed' : ''
-              }`}
+              className="btn-label w-full flex items-center justify-center gap-1.5 py-2.5 transition-colors duration-200"
               style={
                 product.price === 0
-                  ? { background: 'var(--beige)', color: 'var(--brown-soft)' }
+                  ? { border: '1px solid var(--hairline)', color: 'var(--text-tertiary)', cursor: 'not-allowed' }
                   : added
-                  ? { background: 'var(--gold-warm)', color: 'var(--brown)' }
-                  : { background: 'var(--olive-mid)', color: 'white' }
+                  ? { border: '1px solid var(--olive-dark)', background: 'var(--olive-dark)', color: '#fff' }
+                  : { border: '1px solid var(--olive-dark)', background: 'transparent', color: 'var(--olive-dark)' }
               }
             >
               {product.price === 0
                 ? 'Consultar precio'
                 : added
-                ? <>✓ Agregado</>
-                : <><Plus className="w-3.5 h-3.5" strokeWidth={1.5} /> Agregar</>}
+                ? 'Agregado'
+                : <><Plus className="w-3.5 h-3.5" strokeWidth={1.4} /> Agregar</>}
             </button>
           )}
         </div>

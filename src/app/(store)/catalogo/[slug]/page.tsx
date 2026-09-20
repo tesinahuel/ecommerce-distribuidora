@@ -96,10 +96,10 @@ export default function ProductDetailPage() {
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <div
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase w-fit"
-                style={{ background: 'var(--beige)', color: 'var(--brown-soft)', letterSpacing: '0.04em' }}
+                className="nav-label inline-flex items-center px-3 py-1.5 w-fit"
+                style={{ background: 'var(--beige)', color: 'var(--brown-soft)', fontSize: '10.5px', letterSpacing: '0.12em' }}
               >
-                {badge.icon} {badge.name}
+                {badge.name}
               </div>
               <WeekendPromoBadge productId={product.id} />
             </div>
@@ -172,18 +172,18 @@ export default function ProductDetailPage() {
                   </div>
                   {hasDiscount && (
                     <div className="text-right">
-                      <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--gold-warm)' }}>Transferencia 💸</p>
-                      <span className="text-2xl font-bold" style={{ color: 'var(--gold-warm)' }}>{formatPrice(displayTransferPrice!)}</span>
+                      <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--gold)' }}>Transferencia</p>
+                      <span className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{formatPrice(displayTransferPrice!)}</span>
                     </div>
                   )}
                 </div>
               )}
               {weekendPromos.length > 0 && (
                 <div className="pt-3 border-t space-y-1.5" style={{ borderColor: 'var(--hairline)' }}>
-                  <p className="text-xs font-bold" style={{ color: '#CC2200' }}>🎉 Promos de fin de semana (sáb. y dom.)</p>
+                  <p className="nav-label" style={{ fontSize: '11px', color: 'var(--olive-dark)' }}>Promos de fin de semana (sáb. y dom.)</p>
                   {weekendPromos.map((promo, i) => (
                     <p key={i} className="text-xs" style={{ color: 'var(--brown-soft)' }}>
-                      <span className="font-semibold" style={{ color: 'var(--gold-warm)' }}>{promo.label}</span> — {promo.description}: <span className="font-bold" style={{ color: 'var(--brown)' }}>{formatPrice(promo.dealPrice)}</span>
+                      <span className="font-semibold" style={{ color: 'var(--gold)' }}>{promo.label}</span> — {promo.description}: <span className="font-bold" style={{ color: 'var(--brown)' }}>{formatPrice(promo.dealPrice)}</span>
                     </p>
                   ))}
                 </div>
@@ -221,8 +221,8 @@ export default function ProductDetailPage() {
                 !canAdd
                   ? { background: 'var(--beige)', color: 'var(--brown-soft)', cursor: 'not-allowed' }
                   : added
-                  ? { background: 'var(--gold-warm)', color: 'var(--brown)' }
-                  : { background: 'var(--olive-mid)', color: 'white' }
+                  ? { background: 'var(--gold)', color: 'var(--brown)' }
+                  : { background: 'var(--olive-dark)', color: 'white' }
               }
             >
               <ShoppingCart className="w-5 h-5" strokeWidth={1.5} />

@@ -46,10 +46,10 @@ const PAYMENT_METHODS = [
   },
 ]
 
-const inputClass = 'w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none transition-all'
-const inputStyle = { background: '#050510', border: '1px solid rgba(255,255,255,0.1)' }
-const labelClass = 'block text-sm font-medium mb-1'
-const labelStyle = { color: '#aaa' }
+const inputClass = 'w-full px-3 py-2.5 text-sm font-sans-ui focus:outline-none transition-all'
+const inputStyle = { background: 'var(--cream)', border: '1px solid var(--hairline)', color: 'var(--text-primary)' }
+const labelClass = 'block text-sm font-medium mb-1 font-sans-ui'
+const labelStyle = { color: 'var(--text-secondary)' }
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -78,24 +78,22 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <p className="text-5xl mb-4">🛒</p>
-        <h1 className="text-2xl font-bold text-white mb-4">Tu carrito está vacío</h1>
-        <Link href="/catalogo" className="font-semibold hover:text-white transition-colors" style={{ color: '#CC2200' }}>Ver catálogo</Link>
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center" style={{ background: 'var(--cream)' }}>
+        <h1 className="font-display mb-4" style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Tu carrito está vacío</h1>
+        <Link href="/catalogo" className="nav-label transition-opacity hover:opacity-70" style={{ fontSize: '12px', color: 'var(--olive-dark)' }}>Ver catálogo</Link>
       </div>
     )
   }
 
   if (belowMinimum) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <p className="text-5xl mb-4">⚠️</p>
-        <h1 className="text-2xl font-bold text-white mb-2">Monto mínimo no alcanzado</h1>
-        <p className="mb-6" style={{ color: '#aaa' }}>
-          El pedido mínimo es de <strong className="text-white">{formatPrice(MIN_ORDER_AMOUNT)}</strong>.<br />
-          Tu carrito tiene <strong className="text-white">{formatPrice(subtotal)}</strong> — faltan <strong className="text-white">{formatPrice(MIN_ORDER_AMOUNT - subtotal)}</strong>.
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center" style={{ background: 'var(--cream)' }}>
+        <h1 className="font-display mb-3" style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Monto mínimo no alcanzado</h1>
+        <p className="mb-8 font-sans-ui" style={{ color: 'var(--text-secondary)' }}>
+          El pedido mínimo es de <strong style={{ color: 'var(--text-primary)' }}>{formatPrice(MIN_ORDER_AMOUNT)}</strong>.<br />
+          Tu carrito tiene <strong style={{ color: 'var(--text-primary)' }}>{formatPrice(subtotal)}</strong> — faltan <strong style={{ color: 'var(--text-primary)' }}>{formatPrice(MIN_ORDER_AMOUNT - subtotal)}</strong>.
         </p>
-        <Link href="/catalogo" className="btn-red inline-flex items-center gap-2 font-bold px-6 py-3 rounded-xl text-white">
+        <Link href="/catalogo" className="btn-label inline-flex items-center gap-2 px-6 py-3" style={{ background: 'var(--olive-dark)', color: '#fff' }}>
           Seguir comprando
         </Link>
       </div>
@@ -155,14 +153,14 @@ export default function CheckoutPage() {
     }
   }
 
-  const sectionStyle = { background: '#0d0d2b', border: '1px solid rgba(255,255,255,0.08)' }
+  const sectionStyle = { background: 'var(--card-white)', border: '1px solid var(--hairline)' }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <Link href="/carrito" className="inline-flex items-center gap-1.5 text-sm mb-6 transition-colors hover:text-white" style={{ color: '#888' }}>
-        <ArrowLeft className="w-4 h-4" /> Volver al carrito
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10" style={{ background: 'var(--cream)' }}>
+      <Link href="/carrito" className="inline-flex items-center gap-1.5 text-sm mb-6 transition-opacity hover:opacity-70" style={{ color: 'var(--text-secondary)' }}>
+        <ArrowLeft className="w-4 h-4" strokeWidth={1.6} /> Volver al carrito
       </Link>
-      <h1 className="text-2xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-brand), sans-serif', letterSpacing: '0.03em' }}>
+      <h1 className="font-display mb-8" style={{ fontSize: '2.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
         Finalizar compra
       </h1>
 
@@ -170,8 +168,8 @@ export default function CheckoutPage() {
         <div className="lg:col-span-2 space-y-5">
 
           {/* Contacto */}
-          <section className="rounded-2xl p-5" style={sectionStyle}>
-            <h2 className="font-bold text-white mb-4">Datos de contacto</h2>
+          <section className="p-5" style={sectionStyle}>
+            <h2 className="font-display mb-4" style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Datos de contacto</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
                 <label className={labelClass} style={labelStyle}>Nombre completo *</label>
@@ -192,9 +190,9 @@ export default function CheckoutPage() {
           </section>
 
           {/* Dirección */}
-          <section className="rounded-2xl p-5" style={sectionStyle}>
-            <h2 className="font-bold text-white mb-1">Dirección de entrega</h2>
-            <p className="text-xs mb-4" style={{ color: '#666' }}>Delivery {DELIVERY_DAYS.toLowerCase()} · Cobertura en GBA</p>
+          <section className="p-5" style={sectionStyle}>
+            <h2 className="font-display mb-1" style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Dirección de entrega</h2>
+            <p className="text-xs mb-4" style={{ color: 'var(--text-tertiary)' }}>Delivery {DELIVERY_DAYS.toLowerCase()} · Cobertura en GBA</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className={labelClass} style={labelStyle}>Calle *</label>
@@ -217,18 +215,18 @@ export default function CheckoutPage() {
                   {...register('zone')}
                   onChange={(e) => setSelectedZone(e.target.value)}
                   className={inputClass}
-                  style={{ ...inputStyle, colorScheme: 'dark' }}
+                  style={inputStyle}
                 >
                   <option value="">Seleccioná tu zona</option>
                   {SHIPPING_ZONES.map((z) => (
                     <option key={z.id} value={z.id}>
-                      {z.name} — {subtotal >= FREE_SHIPPING_FROM ? 'Envío gratis 🎉' : formatPrice(z.price)}
+                      {z.name} — {subtotal >= FREE_SHIPPING_FROM ? 'Envío gratis' : formatPrice(z.price)}
                     </option>
                   ))}
                 </select>
                 {errors.zone && <p className="text-red-400 text-xs mt-1">{errors.zone.message}</p>}
                 {shippingZoneData && (
-                  <p className="text-xs mt-1" style={{ color: '#666' }}>{shippingZoneData.localities.slice(0, 4).join(', ')}…</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>{shippingZoneData.localities.slice(0, 4).join(', ')}…</p>
                 )}
               </div>
               <div>
@@ -243,8 +241,8 @@ export default function CheckoutPage() {
           </section>
 
           {/* Turno */}
-          <section className="rounded-2xl p-5" style={sectionStyle}>
-            <h2 className="font-bold text-white mb-4">Turno de entrega</h2>
+          <section className="p-5" style={sectionStyle}>
+            <h2 className="font-display mb-4" style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Turno de entrega</h2>
             <div className="grid grid-cols-2 gap-3">
               {[
                 { value: 'mañana', label: 'Mañana', desc: '10:00 — 13:00 hs', icon: Sun },
@@ -254,53 +252,53 @@ export default function CheckoutPage() {
                 return (
                   <label
                     key={value}
-                    className="flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all"
+                    className="flex items-center gap-3 p-4 border cursor-pointer transition-all"
                     style={selected
-                      ? { borderColor: '#CC2200', background: 'rgba(204,34,0,0.1)' }
-                      : { borderColor: 'rgba(255,255,255,0.08)', background: 'transparent' }}
+                      ? { borderColor: 'var(--olive-dark)', background: 'var(--beige)' }
+                      : { borderColor: 'var(--hairline)', background: 'transparent' }}
                   >
                     <input {...register('shift')} type="radio" value={value} className="sr-only" />
-                    <Icon className="w-5 h-5 shrink-0" style={{ color: selected ? '#CC2200' : '#555' }} />
+                    <Icon className="w-5 h-5 shrink-0" strokeWidth={1.4} style={{ color: selected ? 'var(--olive-dark)' : 'var(--text-tertiary)' }} />
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: selected ? 'white' : '#aaa' }}>{label}</p>
-                      <p className="text-xs" style={{ color: '#666' }}>{desc}</p>
+                      <p className="text-sm font-medium font-sans-ui" style={{ color: selected ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{label}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{desc}</p>
                     </div>
                   </label>
                 )
               })}
             </div>
-            <p className="text-xs mt-3" style={{ color: '#555' }}>Días de entrega: {DELIVERY_DAYS}</p>
+            <p className="text-xs mt-3" style={{ color: 'var(--text-tertiary)' }}>Días de entrega: {DELIVERY_DAYS}</p>
           </section>
 
           {/* Pago */}
-          <section className="rounded-2xl p-5" style={sectionStyle}>
-            <h2 className="font-bold text-white mb-4">Forma de pago</h2>
+          <section className="p-5" style={sectionStyle}>
+            <h2 className="font-display mb-4" style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Forma de pago</h2>
             <div className="space-y-3">
               {PAYMENT_METHODS.map(({ value, label, badge, desc, icon: Icon }) => {
                 const selected = paymentMethod === value
                 return (
                   <label
                     key={value}
-                    className="flex items-start gap-3.5 p-4 rounded-xl border-2 cursor-pointer transition-all"
+                    className="flex items-start gap-3.5 p-4 border cursor-pointer transition-all"
                     style={selected
-                      ? { borderColor: '#CC2200', background: 'rgba(204,34,0,0.1)' }
-                      : { borderColor: 'rgba(255,255,255,0.08)', background: 'transparent' }}
+                      ? { borderColor: 'var(--olive-dark)', background: 'var(--beige)' }
+                      : { borderColor: 'var(--hairline)', background: 'transparent' }}
                   >
                     <input {...register('paymentMethod')} type="radio" value={value} className="sr-only" />
-                    <div className="mt-0.5 p-2 rounded-lg shrink-0" style={{ background: selected ? 'rgba(204,34,0,0.2)' : 'rgba(255,255,255,0.05)' }}>
-                      <Icon className="w-4 h-4" style={{ color: selected ? '#CC2200' : '#666' }} />
+                    <div className="mt-0.5 p-2 shrink-0" style={{ background: selected ? 'var(--card-white)' : 'transparent' }}>
+                      <Icon className="w-4 h-4" strokeWidth={1.4} style={{ color: selected ? 'var(--olive-dark)' : 'var(--text-tertiary)' }} />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="text-sm font-semibold" style={{ color: selected ? 'white' : '#aaa' }}>{label}</p>
+                        <p className="text-sm font-medium font-sans-ui" style={{ color: selected ? 'var(--text-primary)' : 'var(--text-secondary)' }}>{label}</p>
                         {badge && (
-                          <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white badge-discount" style={{ background: '#CC2200' }}>{badge}</span>
+                          <span className="nav-label px-2 py-0.5" style={{ background: 'var(--olive-dark)', color: '#fff', fontSize: '9.5px' }}>{badge}</span>
                         )}
                       </div>
-                      <p className="text-xs mt-0.5" style={{ color: '#666' }}>{desc}</p>
+                      <p className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>{desc}</p>
                     </div>
                     {selected && (
-                      <div className="shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-1" style={{ background: '#CC2200' }}>
+                      <div className="shrink-0 w-4 h-4 flex items-center justify-center mt-1" style={{ background: 'var(--olive-dark)' }}>
                         <span className="text-white text-xs">✓</span>
                       </div>
                     )}
@@ -309,16 +307,16 @@ export default function CheckoutPage() {
               })}
             </div>
             {paymentMethod === 'efectivo' && (
-              <div className="mt-3 rounded-xl p-3.5 text-sm" style={{ background: 'rgba(204,34,0,0.08)', border: '1px solid rgba(204,34,0,0.25)' }}>
-                <p className="font-semibold mb-1 text-white">💵 10% de descuento en efectivo aplicado</p>
-                <p className="text-xs" style={{ color: '#aaa' }}>Abonás en el momento de recibir el pedido.</p>
+              <div className="mt-3 p-3.5 text-sm" style={{ background: 'var(--beige)', border: '1px solid var(--hairline)' }}>
+                <p className="font-medium mb-1" style={{ color: 'var(--text-primary)' }}>10% de descuento en efectivo aplicado</p>
+                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Abonás en el momento de recibir el pedido.</p>
               </div>
             )}
             {paymentMethod === 'transferencia' && (
-              <div className="mt-3 rounded-xl p-3.5 text-sm" style={{ background: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.2)' }}>
-                <p className="font-semibold mb-1 text-white">🏦 Transferencia bancaria</p>
-                <p style={{ color: '#D4AF37' }}>Alias: <span className="font-mono font-bold">huevos.cosmicos.uala</span> (Uala)</p>
-                <p className="text-xs mt-1" style={{ color: '#888' }}>Envianos el comprobante por WhatsApp para confirmar el pedido.</p>
+              <div className="mt-3 p-3.5 text-sm" style={{ background: 'var(--beige)', border: '1px solid var(--hairline)' }}>
+                <p className="font-medium mb-1" style={{ color: 'var(--text-primary)' }}>Transferencia bancaria</p>
+                <p style={{ color: 'var(--gold)' }}>Alias: <span className="font-mono font-bold">huevos.cosmicos.uala</span> (Uala)</p>
+                <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>Envianos el comprobante por WhatsApp para confirmar el pedido.</p>
               </div>
             )}
           </section>
@@ -332,56 +330,56 @@ export default function CheckoutPage() {
 
         {/* Resumen */}
         <div className="lg:col-span-1">
-          <div className="rounded-2xl p-5 sticky top-24" style={{ background: '#0d0d2b', border: '1px solid rgba(212,175,55,0.2)' }}>
-            <h2 className="font-bold text-white mb-4">Tu pedido</h2>
-            <ul className="space-y-2 mb-4 text-sm">
+          <div className="p-5 sticky top-32" style={{ background: 'var(--beige)' }}>
+            <h2 className="font-display mb-4" style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-primary)' }}>Tu pedido</h2>
+            <ul className="space-y-2 mb-4 text-sm font-sans-ui">
               {items.map((item) => {
                 const unitPrice = paymentMethod === 'efectivo' && item.product.transferPrice
                   ? item.product.transferPrice
                   : item.product.price
                 return (
                   <li key={item.product.id} className="flex justify-between gap-2">
-                    <span className="truncate" style={{ color: '#888' }}>{item.product.name} <span style={{ color: '#555' }}>x{item.quantity}</span></span>
-                    <span className="font-medium shrink-0 text-white">{formatPrice(unitPrice * item.quantity)}</span>
+                    <span className="truncate" style={{ color: 'var(--text-secondary)' }}>{item.product.name} <span style={{ color: 'var(--text-tertiary)' }}>x{item.quantity}</span></span>
+                    <span className="font-medium shrink-0" style={{ color: 'var(--text-primary)' }}>{formatPrice(unitPrice * item.quantity)}</span>
                   </li>
                 )
               })}
             </ul>
-            <div className="border-t pt-3 space-y-2 text-sm" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+            <div className="pt-3 space-y-2 text-sm font-sans-ui" style={{ borderTop: '1px solid var(--hairline)' }}>
               {paymentMethod === 'efectivo' && effectiveSubtotal < subtotal && (
-                <div className="flex justify-between font-medium" style={{ color: '#CC2200' }}>
+                <div className="flex justify-between font-medium" style={{ color: 'var(--olive-dark)' }}>
                   <span>Descuento efectivo</span>
                   <span>- {formatPrice(subtotal - effectiveSubtotal)}</span>
                 </div>
               )}
-              <div className="flex justify-between" style={{ color: '#888' }}>
+              <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                 <span>Subtotal</span>
-                <span className="text-white">{formatPrice(effectiveSubtotal)}</span>
+                <span style={{ color: 'var(--text-primary)' }}>{formatPrice(effectiveSubtotal)}</span>
               </div>
-              <div className="flex justify-between" style={{ color: '#888' }}>
+              <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                 <span>Envío</span>
-                <span className="text-white">{freeShipping ? '¡Gratis! 🎉' : shippingZoneData ? formatPrice(shippingCost) : 'A calcular'}</span>
+                <span style={{ color: 'var(--text-primary)' }}>{freeShipping ? '¡Gratis!' : shippingZoneData ? formatPrice(shippingCost) : 'A calcular'}</span>
               </div>
               {shippingZoneData && !freeShipping && (
-                <p className="text-xs rounded-lg p-2" style={{ color: '#D4AF37', background: 'rgba(212,175,55,0.07)' }}>
+                <p className="text-xs p-2" style={{ color: 'var(--olive-dark)', background: 'var(--cream)' }}>
                   Agregá {formatPrice(FREE_SHIPPING_FROM - subtotal)} más para envío gratis
                 </p>
               )}
             </div>
-            <div className="border-t mt-3 pt-3" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-              <div className="flex justify-between font-bold text-xl mb-5">
-                <span className="text-white">Total</span>
-                <span style={{ color: '#D4AF37' }}>{formatPrice(total)}</span>
+            <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--hairline)' }}>
+              <div className="flex justify-between items-baseline font-display mb-5" style={{ fontSize: '1.4rem', fontWeight: 600 }}>
+                <span style={{ color: 'var(--text-primary)' }}>Total</span>
+                <span style={{ color: 'var(--olive-dark)' }}>{formatPrice(total)}</span>
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full font-bold py-4 rounded-xl transition-colors text-sm text-white disabled:cursor-not-allowed btn-red"
-                style={loading ? { background: '#555', cursor: 'not-allowed', boxShadow: 'none' } : undefined}
+                className="btn-label w-full py-4 transition-colors disabled:cursor-not-allowed"
+                style={loading ? { background: 'var(--hairline)', color: 'var(--text-tertiary)' } : { background: 'var(--olive-dark)', color: '#fff' }}
               >
                 {loading ? 'Procesando...' : 'Confirmar pedido'}
               </button>
-              <p className="text-xs text-center mt-3 leading-relaxed" style={{ color: '#555' }}>
+              <p className="text-xs text-center mt-3 leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
                 Te contactamos por WhatsApp para coordinar la entrega.
               </p>
             </div>

@@ -25,11 +25,11 @@ export default function LineFilter() {
     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
       <button
         onClick={() => handleSelect(null)}
-        className={cn('flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all')}
+        className={cn('btn-label flex-shrink-0 px-4 py-2 transition-all')}
         style={
           !activeLine
             ? { background: 'var(--olive-dark)', color: 'white' }
-            : { background: 'var(--card-white)', color: 'var(--brown-soft)', border: '1px solid var(--hairline)' }
+            : { background: 'var(--card-white)', color: 'var(--text-secondary)', border: '1px solid var(--hairline)' }
         }
       >
         Todos
@@ -40,15 +40,14 @@ export default function LineFilter() {
           <button
             key={line.id}
             onClick={() => handleSelect(line.id)}
-            className={cn('flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all')}
+            className={cn('btn-label flex-shrink-0 px-4 py-2 transition-all')}
             style={
               active
                 ? { background: 'var(--olive-dark)', color: 'white' }
-                : { background: 'var(--card-white)', color: 'var(--brown-soft)', border: '1px solid var(--hairline)' }
+                : { background: 'var(--card-white)', color: 'var(--text-secondary)', border: '1px solid var(--hairline)' }
             }
           >
-            <span>{line.icon}</span>
-            <span>{line.name}</span>
+            {line.name}
           </button>
         )
       })}

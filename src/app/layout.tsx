@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Montserrat, Bebas_Neue, Cormorant_Garamond, Inter } from 'next/font/google'
+import { Cormorant_Garamond, Jost } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -7,30 +7,18 @@ import CartDrawer from '@/components/cart/CartDrawer'
 import WhatsAppButton from '@/components/shared/WhatsAppButton'
 import CertificationsSection from '@/components/shared/CertificationsSection'
 import ProveedoresSection from '@/components/shared/ProveedoresSection'
-import StarField from '@/components/shared/StarField'
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-})
-const bebasNeue = Bebas_Neue({
-  subsets: ['latin'],
-  variable: '--font-brand',
-  weight: ['400'],
-  display: 'swap',
-})
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
 })
-const inter = Inter({
+const jost = Jost({
   subsets: ['latin'],
   variable: '--font-sans',
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
 })
 
@@ -48,11 +36,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${bebasNeue.variable} ${cormorant.variable} ${inter.variable}`}>
-      <body className={`${montserrat.className} antialiased`} style={{ background: '#050510', color: '#ffffff' }}>
-        <div className="fixed inset-0 -z-10 galaxy-bg" aria-hidden>
-          <StarField />
-        </div>
+    <html lang="es" className={`${cormorant.variable} ${jost.variable}`}>
+      <body className={`${jost.className} antialiased`} style={{ background: 'var(--cream)', color: 'var(--text-primary)' }}>
         <Header />
         <CartDrawer />
         <main className="min-h-screen">{children}</main>

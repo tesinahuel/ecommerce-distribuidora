@@ -20,10 +20,10 @@ export default function WeekendPromoBadge({ productId, className }: WeekendPromo
 
   return (
     <span
-      className={`animate-pulse text-white text-[10px] font-bold px-2 py-1 rounded-full ${className ?? ''}`}
-      style={{ background: '#CC2200', boxShadow: '0 0 8px rgba(204,34,0,0.7)' }}
+      className={`nav-label px-2 py-1 ${className ?? ''}`}
+      style={{ background: 'var(--olive-dark)', color: '#fff', fontSize: '9.5px' }}
     >
-      🔥 SOLO HOY
+      Solo hoy
     </span>
   )
 }
