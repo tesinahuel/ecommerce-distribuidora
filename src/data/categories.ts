@@ -21,7 +21,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     id: 'pollo',
     name: 'Supremas',
-    description: 'Agros, Soychu y etiqueta propia',
+    description: 'Agros, Eggs Hons y etiqueta propia',
     icon: '🍗',
     color: 'text-amber-400',
     bgColor: 'bg-amber-950/40',

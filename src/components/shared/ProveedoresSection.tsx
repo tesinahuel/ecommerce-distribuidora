@@ -1,9 +1,10 @@
 import { Handshake } from 'lucide-react'
 
 const BRANDS = [
-  { name: 'Soychu', desc: 'Supremas pastoriles' },
+  { name: 'Eggs Hons', desc: 'Supremas pastoriles' },
   { name: 'Agros', desc: 'Pechugas premium' },
-  { name: 'Ginosa', desc: 'Aceites y conservas' },
+  { name: 'Hausbrot', desc: 'Aceites y conservas' },
+  { name: 'Indie Café', desc: 'Desayuno y granola' },
   { name: 'Productores agroecológicos', desc: 'Certificados OIA' },
 ]
 
@@ -19,13 +20,13 @@ export default function ProveedoresSection() {
                 Proveedores de las primeras marcas
               </h2>
               <p className="text-sm leading-relaxed max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
-                Somos distribuidores directos de las principales marcas del mercado. Trabajamos con Soychu, Agros, Ginosa
-                y productores agroecológicos certificados para garantizar la mejor calidad en cada entrega.
+                Somos distribuidores directos de las principales marcas del mercado. Trabajamos con Eggs Hons, Agros,
+                Hausbrot, Indie Café y productores agroecológicos certificados para garantizar la mejor calidad en cada entrega.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
             {BRANDS.map((brand) => (
               <div key={brand.name} className="pt-3" style={{ borderTop: '1px solid var(--hairline)' }}>
                 <p className="text-sm font-medium leading-tight" style={{ color: 'var(--text-primary)' }}>{brand.name}</p>
