@@ -27,7 +27,11 @@ export function formatDate(dateStr: string): string {
 
 export function generateOrderNumber(): string {
   const timestamp = Date.now().toString(36).toUpperCase()
-  const random = Math.random().toString(36).substring(2, 5).toUpperCase()
+  // El número de pedido es lo único que protege la página de seguimiento del cliente,
+  // así que usamos aleatoriedad criptográfica (no Math.random) y 8 caracteres.
+  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+  const bytes = crypto.getRandomValues(new Uint8Array(8))
+  const random = Array.from(bytes, (b) => alphabet[b % alphabet.length]).join('')
   return `ORD-${timestamp}-${random}`
 }
 

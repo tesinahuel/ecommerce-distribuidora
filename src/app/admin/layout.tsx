@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { LayoutDashboard, ShoppingBag, Package, Leaf, LogOut } from 'lucide-react'
+import AdminLogoutButton from '@/components/layout/AdminLogoutButton'
 
 const NAV = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -37,6 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <LogOut className="w-4 h-4" />
             Ver tienda
           </Link>
+          <AdminLogoutButton />
         </div>
       </aside>
 
