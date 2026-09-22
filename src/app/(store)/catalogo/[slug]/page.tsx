@@ -13,8 +13,6 @@ import { useCartStore } from '@/store/cartStore'
 import { formatPrice } from '@/lib/utils'
 import { STORE_ADDRESS } from '@/data/shipping'
 import { Product, ProductVariant } from '@/types'
-import { getPromosForProduct } from '@/data/weekendPromos'
-import WeekendPromoBadge from '@/components/shared/WeekendPromoBadge'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -47,7 +45,6 @@ export default function ProductDetailPage() {
     : product.originalPrice
   const hasSaleDiscount = !!displayOriginalPrice && displayOriginalPrice > displayPrice
   const saleSavings = hasSaleDiscount ? displayOriginalPrice! - displayPrice : 0
-  const weekendPromos = getPromosForProduct(product.id)
 
   const mainImage = product.images[0]
 
@@ -101,7 +98,6 @@ export default function ProductDetailPage() {
               >
                 {badge.name}
               </div>
-              <WeekendPromoBadge productId={product.id} />
             </div>
 
             {product.brand && (
@@ -176,16 +172,6 @@ export default function ProductDetailPage() {
                       <span className="text-2xl font-bold" style={{ color: 'var(--gold)' }}>{formatPrice(displayTransferPrice!)}</span>
                     </div>
                   )}
-                </div>
-              )}
-              {weekendPromos.length > 0 && (
-                <div className="pt-3 border-t space-y-1.5" style={{ borderColor: 'var(--hairline)' }}>
-                  <p className="nav-label" style={{ fontSize: '11px', color: 'var(--olive-dark)' }}>Promos de fin de semana (sáb. y dom.)</p>
-                  {weekendPromos.map((promo, i) => (
-                    <p key={i} className="text-xs" style={{ color: 'var(--brown-soft)' }}>
-                      <span className="font-semibold" style={{ color: 'var(--gold)' }}>{promo.label}</span> — {promo.description}: <span className="font-bold" style={{ color: 'var(--brown)' }}>{formatPrice(promo.dealPrice)}</span>
-                    </p>
-                  ))}
                 </div>
               )}
               {hasDiscount && (

@@ -9,7 +9,6 @@ import { formatPrice } from '@/lib/utils'
 import { getLineConfig } from '@/data/lines'
 import { getCategoryConfig } from '@/data/categories'
 import { useState } from 'react'
-import WeekendPromoBadge from '@/components/shared/WeekendPromoBadge'
 
 interface ProductCardProps {
   product: Product
@@ -71,7 +70,6 @@ export default function ProductCard({ product }: ProductCardProps) {
               {product.variants!.length} presentaciones
             </span>
           )}
-          <WeekendPromoBadge productId={product.id} />
         </div>
       </Link>
 

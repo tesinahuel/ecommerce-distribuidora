@@ -5,7 +5,10 @@ import { formatPrice } from '@/lib/utils'
 
 const TIENDA_LINKS = [
   ['Catálogo completo', '/catalogo'],
-  ['Agroecológicos', '/catalogo?linea=agroecologicos'],
+  ['Orgánicos', '/catalogo?linea=organicos'],
+  ['Naturales', '/catalogo?linea=naturales'],
+  ['Frutos Secos', '/catalogo?linea=frutos-secos'],
+  ['Convencionales', '/catalogo?linea=convencionales'],
   ['Combos', '/catalogo#packs'],
   ['Para empresas', '/empresas'],
 ]

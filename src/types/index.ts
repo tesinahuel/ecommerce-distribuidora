@@ -9,11 +9,10 @@ export type ProductCategory =
   | 'packs'
 
 export type ProductLine =
-  | 'agroecologicos'
-  | 'proteina-pura'
-  | 'aceites'
-  | 'desayuno'
-  | 'linea-fit'
+  | 'organicos'
+  | 'naturales'
+  | 'frutos-secos'
+  | 'convencionales'
 
 export interface ProductVariant {
   weight: string

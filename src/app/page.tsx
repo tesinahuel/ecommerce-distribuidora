@@ -6,25 +6,32 @@ import WeeklyProductCard from '@/components/home/WeeklyProductCard'
 
 const LINES = [
   {
-    id: 'agroecologicos',
-    name: 'Agroecológicos',
-    description: 'Huevos orgánicos, aceite de oliva extra virgen y miel pura, certificados OIA.',
+    id: 'organicos',
+    name: 'Orgánicos',
+    description: 'Huevos orgánicos certificados OIA y productos de granjas libres de químicos.',
     image: '/images/products/huevos-organicos.jpg',
-    href: '/catalogo?linea=agroecologicos',
+    href: '/catalogo?linea=organicos',
   },
   {
-    id: 'proteina-pura',
-    name: 'Proteína pura',
-    description: 'Supremas pastoriles, convencionales, pollo y huevos de primera calidad.',
-    image: '/images/products/pechuga-premium.png',
-    href: '/catalogo?linea=proteina-pura',
-  },
-  {
-    id: 'desayuno',
-    name: 'Desayuno',
-    description: 'Granola, avena, copos de maíz, miel y frutos secos para arrancar bien el día.',
+    id: 'naturales',
+    name: 'Naturales',
+    description: 'Miel pura, aceite de oliva extra virgen, aceite de coco y granola casera.',
     image: '/images/products/miel.jpg',
-    href: '/catalogo?linea=desayuno',
+    href: '/catalogo?linea=naturales',
+  },
+  {
+    id: 'frutos-secos',
+    name: 'Frutos Secos',
+    description: 'Nueces mariposa, almendras Non Pareil y maní sin sal seleccionados.',
+    image: '/images/products/packaging.jpg',
+    href: '/catalogo?linea=frutos-secos',
+  },
+  {
+    id: 'convencionales',
+    name: 'Convencionales',
+    description: 'Huevos blancos y supremas de nuestra línea convencional, calidad diaria.',
+    image: '/images/products/huevos-convencionales.jpg',
+    href: '/catalogo?linea=convencionales',
   },
 ]
 
@@ -104,7 +111,7 @@ export default function HomePage() {
               Elegí por lo que buscás
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {LINES.map((line) => (
               <Link key={line.id} href={line.href} className="group block">
                 <div className="relative overflow-hidden" style={{ height: '232px', background: 'var(--beige)' }}>

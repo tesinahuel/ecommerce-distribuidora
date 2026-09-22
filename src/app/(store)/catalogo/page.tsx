@@ -3,7 +3,6 @@ import { PRODUCTS, getPacks } from '@/data/products'
 import { ProductCategory, ProductLine } from '@/types'
 import ProductCard from '@/components/catalog/ProductCard'
 import LineFilter from '@/components/catalog/CategoryFilter'
-import WeekendPromoBanner from '@/components/shared/WeekendPromoBanner'
 import { Search } from 'lucide-react'
 
 interface PageProps {
@@ -43,23 +42,6 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
           </p>
         </div>
 
-        <div className="mb-8">
-          <WeekendPromoBanner />
-        </div>
-
-        {packs.length > 0 && (
-          <div id="packs" className="mb-12 scroll-mt-24">
-            <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
-              Packs con descuento
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {packs.map((pack) => (
-                <ProductCard key={pack.id} product={pack} />
-              ))}
-            </div>
-          </div>
-        )}
-
         <form className="relative mb-4">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--brown-soft)' }} />
           <input
@@ -88,6 +70,19 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
+          </div>
+        )}
+
+        {packs.length > 0 && (
+          <div id="packs" className="mt-14 pt-10 scroll-mt-24" style={{ borderTop: '1px solid var(--hairline)' }}>
+            <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
+              Packs con descuento
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {packs.map((pack) => (
+                <ProductCard key={pack.id} product={pack} />
+              ))}
+            </div>
           </div>
         )}
       </div>
