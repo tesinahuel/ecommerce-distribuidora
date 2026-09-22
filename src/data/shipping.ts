@@ -1,7 +1,7 @@
 import { ShippingZoneConfig } from '@/types'
 
 export const MIN_ORDER_AMOUNT = 5000
-export const FREE_SHIPPING_FROM = 100000
+export const FREE_SHIPPING_FROM = 50000
 
 export const DELIVERY_DAYS = 'Martes, Miércoles y Jueves'
 export const DELIVERY_SHIFTS = {

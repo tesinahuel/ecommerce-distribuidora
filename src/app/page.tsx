@@ -30,7 +30,7 @@ const LINES = [
     id: 'convencionales',
     name: 'Convencionales',
     description: 'Huevos blancos y supremas de nuestra línea convencional, calidad diaria.',
-    image: '/images/products/huevos-convencionales.jpg',
+    image: '/images/products/huevos-blancos-maple.jpg',
     href: '/catalogo?linea=convencionales',
   },
 ]
