@@ -20,8 +20,8 @@ export const CATEGORIES: CategoryConfig[] = [
   },
   {
     id: 'pollo',
-    name: 'Supremas',
-    description: 'Supremas Agros',
+    name: 'Supremas y Pollo',
+    description: 'Supremas pastoriles, frescas y pollo entero',
     icon: '🍗',
     color: 'text-amber-400',
     bgColor: 'bg-amber-950/40',
@@ -45,7 +45,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     id: 'conservas',
     name: 'Conservas',
-    description: 'Tomate triturado y más',
+    description: 'Ajíes y morrón en vinagre, tomate triturado',
     icon: '🥫',
     color: 'text-orange-400',
     bgColor: 'bg-orange-950/40',
@@ -61,7 +61,7 @@ export const CATEGORIES: CategoryConfig[] = [
   {
     id: 'granola',
     name: 'Granola',
-    description: 'Granola casera en distintos formatos',
+    description: 'Granola casera, avena instantánea y copos de maíz',
     icon: '🥣',
     color: 'text-amber-300',
     bgColor: 'bg-amber-950/40',
