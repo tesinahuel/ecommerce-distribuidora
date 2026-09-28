@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { PRODUCTS, getPacks } from '@/data/products'
+import { LINES } from '@/data/lines'
 import { ProductCategory, ProductLine } from '@/types'
 import ProductCard from '@/components/catalog/ProductCard'
 import LineFilter from '@/components/catalog/CategoryFilter'
@@ -32,6 +33,12 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
     return true
   })
 
+  // Orgánicos → Naturales → Frutos Secos → Convencionales (orden definido en LINES)
+  const productsByLine = LINES.map((line) => ({
+    line,
+    products: products.filter((p) => p.lines[0] === line.id),
+  })).filter((group) => group.products.length > 0)
+
   return (
     <div className="font-sans-ui" style={{ background: 'var(--cream)', minHeight: '100vh' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -60,30 +67,39 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
           </Suspense>
         </div>
 
-        {products.length === 0 ? (
+        {products.length === 0 && packs.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-lg font-medium" style={{ color: 'var(--brown)' }}>No encontramos productos</p>
             <p className="text-sm mt-1" style={{ color: 'var(--brown-soft)' }}>Probá con otro filtro o término de búsqueda</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
+          <>
+            {packs.length > 0 && (
+              <div id="packs" className="mb-14 scroll-mt-24">
+                <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
+                  Combos con descuento
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {packs.map((pack) => (
+                    <ProductCard key={pack.id} product={pack} />
+                  ))}
+                </div>
+              </div>
+            )}
 
-        {packs.length > 0 && (
-          <div id="packs" className="mt-14 pt-10 scroll-mt-24" style={{ borderTop: '1px solid var(--hairline)' }}>
-            <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
-              Combos con descuento
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {packs.map((pack) => (
-                <ProductCard key={pack.id} product={pack} />
-              ))}
-            </div>
-          </div>
+            {productsByLine.map(({ line, products: lineProducts }, i) => (
+              <div key={line.id} className={i > 0 ? 'mt-14 pt-10' : ''} style={i > 0 ? { borderTop: '1px solid var(--hairline)' } : undefined}>
+                <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
+                  {line.icon} {line.name}
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {lineProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </>
         )}
       </div>
     </div>
