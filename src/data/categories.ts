@@ -68,7 +68,7 @@ export const CATEGORIES: CategoryConfig[] = [
   },
   {
     id: 'packs',
-    name: 'Packs',
+    name: 'Combos',
     description: 'Combos con descuento especial',
     icon: '📦',
     color: 'text-emerald-400',
