@@ -76,7 +76,7 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
         {packs.length > 0 && (
           <div id="packs" className="mt-14 pt-10 scroll-mt-24" style={{ borderTop: '1px solid var(--hairline)' }}>
             <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
-              Packs con descuento
+              Combos con descuento
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {packs.map((pack) => (
