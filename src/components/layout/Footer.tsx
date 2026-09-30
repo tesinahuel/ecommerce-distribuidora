@@ -9,7 +9,7 @@ const TIENDA_LINKS = [
   ['Naturales', '/catalogo?linea=naturales'],
   ['Frutos Secos', '/catalogo?linea=frutos-secos'],
   ['Convencionales', '/catalogo?linea=convencionales'],
-  ['Combos', '/catalogo#packs'],
+  ['Combos', '/catalogo?categoria=packs'],
   ['Para empresas', '/empresas'],
 ]
 

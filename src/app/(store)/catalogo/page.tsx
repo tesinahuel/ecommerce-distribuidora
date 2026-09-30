@@ -17,6 +17,7 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
   const searchQuery = params.buscar?.toLowerCase()
 
   const packs = getPacks()
+  const isCombosView = activeCategory === 'packs'
 
   const products = PRODUCTS.filter((p) => {
     if (!p.active) return false
@@ -39,13 +40,17 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
     products: products.filter((p) => p.lines[0] === line.id),
   })).filter((group) => group.products.length > 0)
 
+  const visibleCount = isCombosView ? packs.length : products.length
+
   return (
     <div className="font-sans-ui" style={{ background: 'var(--cream)', minHeight: '100vh' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-8">
-          <h1 className="font-display" style={{ fontSize: '2.25rem', fontWeight: 600, color: 'var(--brown)' }}>Catálogo</h1>
+          <h1 className="font-display" style={{ fontSize: '2.25rem', fontWeight: 600, color: 'var(--brown)' }}>
+            {isCombosView ? 'Combos' : 'Catálogo'}
+          </h1>
           <p className="text-sm mt-1" style={{ color: 'var(--brown-soft)' }}>
-            {products.length} producto{products.length !== 1 ? 's' : ''} disponible{products.length !== 1 ? 's' : ''}
+            {visibleCount} producto{visibleCount !== 1 ? 's' : ''} disponible{visibleCount !== 1 ? 's' : ''}
           </p>
         </div>
 
