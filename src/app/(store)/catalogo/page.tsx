@@ -74,19 +74,6 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
           </div>
         ) : (
           <>
-            {packs.length > 0 && (
-              <div id="packs" className="mb-14 scroll-mt-24">
-                <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
-                  Combos con descuento
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {packs.map((pack) => (
-                    <ProductCard key={pack.id} product={pack} />
-                  ))}
-                </div>
-              </div>
-            )}
-
             {productsByLine.map(({ line, products: lineProducts }, i) => (
               <div key={line.id} className={i > 0 ? 'mt-14 pt-10' : ''} style={i > 0 ? { borderTop: '1px solid var(--hairline)' } : undefined}>
                 <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
@@ -99,6 +86,23 @@ export default async function CatalogoPage({ searchParams }: PageProps) {
                 </div>
               </div>
             ))}
+
+            {packs.length > 0 && (
+              <div
+                id="packs"
+                className={productsByLine.length > 0 ? 'mt-14 pt-10 scroll-mt-24' : 'scroll-mt-24'}
+                style={productsByLine.length > 0 ? { borderTop: '1px solid var(--hairline)' } : undefined}
+              >
+                <h2 className="font-display mb-5" style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--brown)' }}>
+                  Combos con descuento
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {packs.map((pack) => (
+                    <ProductCard key={pack.id} product={pack} />
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
