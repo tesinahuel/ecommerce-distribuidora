@@ -78,7 +78,7 @@ export default function HomePage() {
                 Ver la tienda <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.6} />
               </Link>
               <Link
-                href="/catalogo#packs"
+                href="/catalogo?categoria=packs"
                 className="btn-label inline-flex items-center gap-2 px-8 py-4"
                 style={{ border: '1px solid rgba(255,255,255,0.6)', color: '#fff' }}
               >

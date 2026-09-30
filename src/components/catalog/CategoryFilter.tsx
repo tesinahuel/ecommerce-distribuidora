@@ -8,6 +8,7 @@ export default function LineFilter() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const activeLine = searchParams.get('linea')
+  const activeCategory = searchParams.get('categoria')
 
   const handleSelect = (lineId: string | null) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -21,18 +22,37 @@ export default function LineFilter() {
     router.push(`/catalogo?${params.toString()}`)
   }
 
+  const handleSelectCombos = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('categoria', 'packs')
+    params.delete('linea')
+    params.delete('pagina')
+    router.push(`/catalogo?${params.toString()}`)
+  }
+
   return (
     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
       <button
         onClick={() => handleSelect(null)}
         className={cn('btn-label flex-shrink-0 px-4 py-2 transition-all')}
         style={
-          !activeLine
+          !activeLine && !activeCategory
             ? { background: 'var(--olive-dark)', color: 'white' }
             : { background: 'var(--card-white)', color: 'var(--text-secondary)', border: '1px solid var(--hairline)' }
         }
       >
         Todos
+      </button>
+      <button
+        onClick={handleSelectCombos}
+        className={cn('btn-label flex-shrink-0 px-4 py-2 transition-all')}
+        style={
+          activeCategory === 'packs'
+            ? { background: 'var(--olive-dark)', color: 'white' }
+            : { background: 'var(--card-white)', color: 'var(--text-secondary)', border: '1px solid var(--hairline)' }
+        }
+      >
+        Combos
       </button>
       {LINES.map((line) => {
         const active = activeLine === line.id
