@@ -105,7 +105,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--hairline)' }}>
           {displayPrice === 0 ? (
             <div className="mb-2">
-              {hasVariants ? (
+              {product.free ? (
+                <span className="text-sm font-bold" style={{ color: 'var(--olive-dark)' }}>Gratis</span>
+              ) : hasVariants ? (
                 <span className="text-xs font-medium" style={{ color: 'var(--olive-dark)' }}>Precio a consultar · elegí peso</span>
               ) : (
                 <span className="text-sm font-medium" style={{ color: 'var(--olive-dark)' }}>Precio a consultar</span>
@@ -150,17 +152,17 @@ export default function ProductCard({ product }: ProductCardProps) {
           ) : (
             <button
               onClick={handleAdd}
-              disabled={product.price === 0}
+              disabled={product.price === 0 && !product.free}
               className="btn-label w-full flex items-center justify-center gap-1.5 py-2.5 transition-colors duration-200"
               style={
-                product.price === 0
+                product.price === 0 && !product.free
                   ? { border: '1px solid var(--hairline)', color: 'var(--text-tertiary)', cursor: 'not-allowed' }
                   : added
                   ? { border: '1px solid var(--olive-dark)', background: 'var(--olive-dark)', color: '#fff' }
                   : { border: '1px solid var(--olive-dark)', background: 'transparent', color: 'var(--olive-dark)' }
               }
             >
-              {product.price === 0
+              {product.price === 0 && !product.free
                 ? 'Consultar precio'
                 : added
                 ? 'Agregado'

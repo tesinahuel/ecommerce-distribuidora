@@ -68,7 +68,7 @@ export default function ProductDetailPage() {
     ? `Hola! Quiero consultar sobre *${product.name} — ${selectedVariant.weight}* 🥚`
     : `Hola! Quiero consultar sobre *${product.name}* 🥚`
 
-  const canAdd = hasVariants ? (selectedVariant?.price ?? 0) > 0 : product.price > 0
+  const canAdd = hasVariants ? (selectedVariant?.price ?? 0) > 0 : (product.price > 0 || !!product.free)
 
   return (
     <div className="font-sans-ui" style={{ background: 'var(--cream)', minHeight: '100vh' }}>
@@ -145,7 +145,9 @@ export default function ProductDetailPage() {
               {displayPrice === 0 ? (
                 <div>
                   <p className="text-xs mb-0.5" style={{ color: 'var(--brown-soft)' }}>Precio{hasVariants && selectedVariant ? ` — ${selectedVariant.weight}` : ''}</p>
-                  <span className="text-2xl font-bold" style={{ color: 'var(--olive-dark)' }}>A consultar</span>
+                  <span className="text-2xl font-bold" style={{ color: 'var(--olive-dark)' }}>
+                    {product.free ? 'Gratis' : 'A consultar'}
+                  </span>
                 </div>
               ) : (
                 <div className="flex items-center justify-between">
@@ -216,6 +218,8 @@ export default function ProductDetailPage() {
                 ? 'Precio a consultar'
                 : added
                 ? '¡Agregado al carrito!'
+                : product.free
+                ? 'Agregar gratis'
                 : 'Agregar al carrito'}
             </button>
 

@@ -50,6 +50,7 @@ export interface Product {
   price: number
   originalPrice?: number
   transferPrice?: number
+  free?: boolean
   unit: string
   stock: number
   minOrder: number
