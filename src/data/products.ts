@@ -889,6 +889,25 @@ export const PRODUCTS: Product[] = [
     createdAt: '2026-09-28',
     updatedAt: '2026-09-29',
   },
+  {
+    id: 'combo-vip',
+    name: 'Combo VIP',
+    slug: 'combo-vip',
+    category: 'packs',
+    lines: [],
+    description: 'Aceite de Oliva Orgánico + Pechugas Pastoriles + Miel 500g',
+    price: 0,
+    unit: 'combo',
+    stock: 999,
+    minOrder: 1,
+    images: [],
+    packItems: ['Aceite de Oliva Orgánico', 'Pechugas Pastoriles', 'Miel 500g'],
+    featured: false,
+    active: true,
+    tags: ['combo', 'vip'],
+    createdAt: '2026-09-29',
+    updatedAt: '2026-09-29',
+  },
 ]
 
 export const getProductsByLine = (lineId: string) =>
